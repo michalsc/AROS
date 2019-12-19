@@ -2,7 +2,7 @@ dnl Copyright © 1997-2019, The AROS Development Team. All rights reserved.
 dnl $Id$
 dnl
 dnl Desc: Autoconf source for target compiler feature detection
-dnl Lang: english 
+dnl Lang: english
 
 # Note: After file changes, generate features anew and commit _both_ files.
 -------------------------
@@ -70,7 +70,7 @@ AC_MSG_RESULT($aros_targetcfg_dir)
 
 #  -fvisibility=hidden
 
-# C features first 
+# C features first
 AC_LANG_PUSH(C)
 
 save_cflags="$CFLAGS"
@@ -130,7 +130,7 @@ AC_MSG_RESULT($aros_lto)
 if test "x-$aros_lto" = "x-yes" ; then
     aros_cflags_lto=-flto
     aros_cflags_nolto=-fno-lto
-    
+
     AC_MSG_CHECKING([whether ${CC} accepts -fwhole-program])
     CFLAGS=-fwhole-program
     AC_TRY_COMPILE(,, aros_whole_program="yes", aros_whole_program="no")
@@ -138,7 +138,7 @@ if test "x-$aros_lto" = "x-yes" ; then
     if test "x-$aros_whole_program" = "x-yes" ; then
         aros_cflags_whole_program=-fwhole-program
     fi
-    
+
     AC_MSG_CHECKING([whether ${CC} accepts -floop-block])
     CFLAGS=-floop-block
     AC_TRY_COMPILE(,, aros_loop_block="yes", aros_loop_block="no")
@@ -146,7 +146,7 @@ if test "x-$aros_lto" = "x-yes" ; then
     if test "x-$aros_loop_block" = "x-yes" ; then
         aros_cflags_loop_block=-floop-block
     fi
-    
+
     AC_MSG_CHECKING([whether ${CC} accepts -floop-interchange])
     CFLAGS=-floop-interchange
     AC_TRY_COMPILE(,, aros_loop_interchange="yes", aros_loop_interchange="no")
@@ -154,7 +154,7 @@ if test "x-$aros_lto" = "x-yes" ; then
     if test "x-$aros_loop_interchange" = "x-yes" ; then
         aros_cflags_loop_interchange=-floop-interchange
     fi
-    
+
     AC_MSG_CHECKING([whether ${CC} accepts -floop-strip-mine])
     CFLAGS=-floop-strip-mine
     AC_TRY_COMPILE(,, aros_loop_strip_mine="yes", aros_loop_strip_mine="no")
@@ -427,7 +427,7 @@ CFLAGS="$save_cflags"
 #  -Wint-to-pointer-cast
 #  -Wpointer-to-int-cast
 #  -Wunused-const-variable
-#  -Wwrite-strings 
+#  -Wwrite-strings
 #  -Wcomment
 #  -Wincompatible-pointer-types
 #  -Wbool-compare
@@ -1155,7 +1155,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
 AC_MSG_RESULT($toolchain_needs_sysroot)
 
 if test "$toolchain_needs_sysroot" = "yes" ; then
-    aros_toolchain_sysroot="--sysroot $""(AROS_DEVELOPER)"
+    aros_toolchain_sysroot="--sysroot $""(AROS_SDK)"
 fi
 
 #AC_MSG_CHECKING([if we need to use --isysroot])

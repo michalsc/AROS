@@ -9,8 +9,8 @@ If WARN
     Assign "Developer:" "SYS:Developer" >NIL:
 EndIf
 
-Assign INCLUDE: Developer:include
-Assign LIB: Developer:lib
+Assign INCLUDE: Developer:SDK/include
+Assign LIB: Developer:SDK/lib
 Assign USR: Developer:
 Assign TMP: T:
 Assign ETC: Developer:etc
