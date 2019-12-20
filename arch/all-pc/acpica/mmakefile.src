@@ -65,7 +65,7 @@ FILES := acpios_aros \
          $(ACPICA_SOURCES)
 
 USER_INCLUDES += \
-         -I$(AROS_INCLUDES)/acpica \
+         -I$(AROS_ARCH_INCLUDES)/acpica \
          -iquote $(ACPICA_INCLUDES) \
          -iquote $(ACPICA_INCLUDES)/platform
 

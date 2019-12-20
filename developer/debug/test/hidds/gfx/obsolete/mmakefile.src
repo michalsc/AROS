@@ -6,8 +6,8 @@ include $(SRCDIR)/config/aros.cfg
 EXEDIR      := $(AROSDIR)/Demos
 OBJDIR      := $(GENDIR)/test/HiddGraphics
 
-STARTUP = $(AROS_LIB)/startup.o
-LIBS    = -L$(AROS_LIB) -larossupport -lamiga $(TOOL).a -lstdc
+STARTUP = $(AROS_ARCH_LIB)/startup.o
+LIBS    = -L$(AROS_ARCH_LIB) -larossupport -lamiga $(TOOL).a -lstdc
 
 FILES	    := \
 	BitMapNewDispose \
@@ -41,7 +41,7 @@ obsolete-test-hidd-graphics-quick : $(EXES)
 clean ::
 	-$(RM) $(EXES)
 
-$(EXEDIR)/% : $(OBJDIR)/%.o $(TOOL).a $(AROS_LIB)/startup.o $(DEPLIBS) | $(EXEDIR)
+$(EXEDIR)/% : $(OBJDIR)/%.o $(TOOL).a $(AROS_ARCH_LIB)/startup.o $(DEPLIBS) | $(EXEDIR)
 	%link_q
 
 $(OBJDIR)/%.o : %.c | $(OBJDIR)

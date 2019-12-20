@@ -23,7 +23,7 @@ INIT_FILE   := $(LIBNAME)_init
 END_FILE    := $(LIBNAME)_end
 
 MY_INCLS    := $(wildcard include/*.h)
-DEST_INC    := $(foreach f,$(MY_INCLS), $(AROS_INCLUDES)/hidd/$(notdir $f))
+DEST_INC    := $(foreach f,$(MY_INCLS), $(AROS_ARCH_INCLUDES)/hidd/$(notdir $f))
 GEN_INC	    := $(foreach f,$(MY_INCLS), $(GENINCDIR)/hidd/$(notdir $f))
 
 ifeq ($(FLAVOUR),native)
@@ -102,7 +102,7 @@ $(LIB): libdefs.h $(ALL_OBJS)
 includes-copy : $(DEST_INC) $(GEN_INC)
 	@$(NOP)
 
-$(AROS_INCLUDES)/hidd/%.h : include/%.h
+$(AROS_ARCH_INCLUDES)/hidd/%.h : include/%.h
 	$(CP) include/$(notdir $<) $@
 
 $(GENINCDIR)/hidd/%.h : include/%.h
@@ -110,7 +110,7 @@ $(GENINCDIR)/hidd/%.h : include/%.h
 
 #MM
 setup-includes :
-	%mkdirs_q $(GENINCDIR) $(AROS_INCLUDES) $(GENINCDIR)/hidd $(AROS_INCLUDES)/hidd
+	%mkdirs_q $(GENINCDIR) $(AROS_ARCH_INCLUDES) $(GENINCDIR)/hidd $(AROS_ARCH_INCLUDES)/hidd
 
 # Rule to create a .library in the local dir
 libdefs.h : lib.conf $(BINDIR)/scripts/genlibdefs.awk

@@ -25,8 +25,8 @@ include $(SRCDIR)/config/aros.cfg
 
 TARGETDIR := $(AROS_TESTS)/Library
 
-USER_INCLUDES := -I$(TARGETDIR)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_SDK)/include
-USER_LDFLAGS := -L$(TARGETDIR)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_SDK)/lib
+USER_INCLUDES := -I$(TARGETDIR)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_ARCH_SDK)/include
+USER_LDFLAGS := -L$(TARGETDIR)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_ARCH_SDK)/lib
 
 %build_prog mmake=test-library-peropenertest \
     progname=peropenertest targetdir=$(TARGETDIR) \

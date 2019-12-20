@@ -33,7 +33,7 @@ $(MAKECOUNTRY) : $(OBJS) $(OBJDIR)/makecountry.o
 	@$(ECHO) "Making $(@F)..."
 	@$(HOST_CC) $(HOST_LDFLAGS) $^ -o $@ $(LIBICONV)
 
-USER_INCLUDES := -I$(SRCDIR)/$(CURDIR)/makecountry -idirafter $(AROS_INCLUDES)
+USER_INCLUDES := -I$(SRCDIR)/$(CURDIR)/makecountry -idirafter $(AROS_ARCH_INCLUDES)
 USER_CPPFLAGS := -D_EURO
 
 $(OBJDIR)/makecountry.o : | $(OBJDIR)

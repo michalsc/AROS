@@ -115,17 +115,17 @@ FT2FILES := $(addprefix $(FT2AROSBUILDDIR)/,$(FT2BASEARCHFILES)) $(addprefix $(F
 #
 
 #MM
-workbench-libs-freetype-pkgconfig : $(AROS_LIB)/pkgconfig/freetype2.pc
+workbench-libs-freetype-pkgconfig : $(AROS_ARCH_LIB)/pkgconfig/freetype2.pc
 
-$(AROS_LIB)/pkgconfig/freetype2.pc : $(FT2SRCDIR)/builds/unix/freetype2.in
-	%mkdir_q dir=$(AROS_LIB)/pkgconfig
+$(AROS_ARCH_LIB)/pkgconfig/freetype2.pc : $(FT2SRCDIR)/builds/unix/freetype2.in
+	%mkdir_q dir=$(AROS_ARCH_LIB)/pkgconfig
 	@$(SED) -e 's|%FT2_EXTRA_LIBS%||' \
 	       -e 's|%LIBBZ2%||' \
-	       -e 's|%LIBZ%|-L $(AROS_LIB) -lz|' \
+	       -e 's|%LIBZ%|-L $(AROS_ARCH_LIB) -lz|' \
 	       -e 's|%exec_prefix%|$${prefix}|' \
 	       -e 's|%ft_version%|2.5.0|' \
 	       -e 's|%includedir%|$${prefix}/include|' \
-	       -e 's|%libdir%|$(AROS_LIB)|' \
+	       -e 's|%libdir%|$(AROS_ARCH_LIB)|' \
 	       -e 's|%prefix%|/Developer|' \
 	       $< >$@
 
@@ -141,13 +141,13 @@ FT2OPTIONFILE := ftoption.h
 FT2CONFIG_INCLUDE_FILES := $(filter-out $(FT2OPTIONFILE),$(notdir $(call WILDCARD, $(FT2SRCDIR)/include/freetype/config/*.h)))
 %copy_includes path=freetype/config  dir=$(FT2SRCDIR)/include/freetype/config includes=$(FT2CONFIG_INCLUDE_FILES)
 
-$(AROS_INCLUDES)/freetype/config/$(FT2OPTIONFILE) : $(FT2SRCDIR)/include/freetype/config/$(FT2OPTIONFILE)
+$(AROS_ARCH_INCLUDES)/freetype/config/$(FT2OPTIONFILE) : $(FT2SRCDIR)/include/freetype/config/$(FT2OPTIONFILE)
 	@$(ECHO) "Generating Freetype2 build options ..."
-	%mkdir_q dir=$(AROS_INCLUDES)/freetype/config
+	%mkdir_q dir=$(AROS_ARCH_INCLUDES)/freetype/config
 	@$(SED) "s|.*FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES.*|/*define FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES*/\\n|g" $< > $@
 
 #MM
-workbench-libs-freetype-genincludes : freetype2-fetch $(AROS_INCLUDES)/freetype/config/$(FT2OPTIONFILE)
+workbench-libs-freetype-genincludes : freetype2-fetch $(AROS_ARCH_INCLUDES)/freetype/config/$(FT2OPTIONFILE)
 	$(NOP)
 
 FT2INT_INCLUDE_FILES := $(notdir $(call WILDCARD, $(FT2SRCDIR)/include/freetype/internal/*.h))

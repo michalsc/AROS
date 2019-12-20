@@ -1155,7 +1155,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
 AC_MSG_RESULT($toolchain_needs_sysroot)
 
 if test "$toolchain_needs_sysroot" = "yes" ; then
-    aros_toolchain_sysroot="--sysroot $""(AROS_SDK)"
+    aros_toolchain_sysroot="--sysroot $""(AROS_ARCH_SDK)"
 fi
 
 #AC_MSG_CHECKING([if we need to use --isysroot])

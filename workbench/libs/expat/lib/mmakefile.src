@@ -32,10 +32,10 @@ INCLUDE_FILES := expat.h expat_external.h
 
 
 #MM
-workbench-libs-expat-pc : $(AROS_LIB)/pkgconfig/expat.pc
+workbench-libs-expat-pc : $(AROS_ARCH_LIB)/pkgconfig/expat.pc
 
-$(AROS_LIB)/pkgconfig/expat.pc : $(SRCDIR)/$(CURDIR)/../expat.pc.aros
-	@$(IF) $(TEST) ! -d $(AROS_LIB)/pkgconfig ; then $(MKDIR) $(AROS_LIB)/pkgconfig ; else $(NOP) ; fi
+$(AROS_ARCH_LIB)/pkgconfig/expat.pc : $(SRCDIR)/$(CURDIR)/../expat.pc.aros
+	@$(IF) $(TEST) ! -d $(AROS_ARCH_LIB)/pkgconfig ; then $(MKDIR) $(AROS_ARCH_LIB)/pkgconfig ; else $(NOP) ; fi
 	$(CP) $^ $@
 
 

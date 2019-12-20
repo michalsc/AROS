@@ -42,7 +42,7 @@ kernel-image-efika-arm:
 arosboot-efika: $(AROSDIR)/boot/arosboot
 
 $(AROSDIR)/boot/arosboot: $(foreach f, $(FILES), $(TARGETDIR)/$(f).o $(TARGETDIR)/$(f).d) $(TARGETDIR)/kernel.bin.o
-	$(KERNEL_LD) -s --entry=bootstrap --script=$(SRCDIR)/$(CURDIR)/ldscript.lds $(foreach f, $(FILES), $(TARGETDIR)/$(f).o) $(TARGETDIR)/kernel.bin.o -L$(AROS_LIB) -lm -larosc.static -lm -laeabi -o $@
+	$(KERNEL_LD) -s --entry=bootstrap --script=$(SRCDIR)/$(CURDIR)/ldscript.lds $(foreach f, $(FILES), $(TARGETDIR)/$(f).o) $(TARGETDIR)/kernel.bin.o -L$(AROS_ARCH_LIB) -lm -larosc.static -lm -laeabi -o $@
 	$(OBJCOPY) -O binary $@ $@.bin
 	gzip $@.bin
 	mv $@.bin.gz $@.bin

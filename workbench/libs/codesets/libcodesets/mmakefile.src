@@ -2,7 +2,7 @@ include $(SRCDIR)/config/aros.cfg
 
 #MM- core-linklibs : linklibs-codesets
 
-CODESETS_LIB := $(AROS_LIB)/libcodesets.a
+CODESETS_LIB := $(AROS_ARCH_LIB)/libcodesets.a
 
 #MM- linklibs-codesets: includes linklibs-codesets-quick
 #MM linklibs-codesets-quick : linklibs-codesets-setup 
@@ -23,4 +23,4 @@ $(OBJDIR)/%.o : %.c
 #MM
 linklibs-codesets-setup :
 	%mkdirs_q $(OBJDIR)
-	%mkdirs_q $(AROS_LIB)
+	%mkdirs_q $(AROS_ARCH_LIB)

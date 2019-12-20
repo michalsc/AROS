@@ -11,14 +11,14 @@ USER_CPPFLAGS := -DADATE="\"$(shell date '+%d.%m.%Y')\""
     files="cia_init cia_interrupt $(FUNCTIONS) resident_end"
 
 #MM
-kernel-cia-includes: $(AROS_INCLUDES)/clib/cia_protos.h $(AROS_INCLUDES)/defines/cia.h \
-		     $(AROS_INCLUDES)/proto/cia.h
+kernel-cia-includes: $(AROS_ARCH_INCLUDES)/clib/cia_protos.h $(AROS_ARCH_INCLUDES)/defines/cia.h \
+		     $(AROS_ARCH_INCLUDES)/proto/cia.h
 
-$(AROS_INCLUDES)/clib/cia_protos.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
+$(AROS_ARCH_INCLUDES)/clib/cia_protos.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
 	$(SFDC) --mode=clib --target=x-aros --output=$@ $<
 
-$(AROS_INCLUDES)/defines/cia.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
+$(AROS_ARCH_INCLUDES)/defines/cia.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
 	$(SFDC) --mode=macros --target=x-aros --output=$@ $<
 
-$(AROS_INCLUDES)/proto/cia.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
+$(AROS_ARCH_INCLUDES)/proto/cia.h: $(SRCDIR)/$(CURDIR)/cia_lib.sfd
 	$(SFDC) --mode=proto --target=x-aros --output=$@ $<

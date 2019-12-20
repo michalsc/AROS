@@ -8,7 +8,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM     kernel-utility-includes
 
 %copy_dir_recursive mmake=external-openurl-includes \
-    src=$(SRCDIR)/$(CURDIR)/C/include dst=$(AROS_INCLUDES)/
+    src=$(SRCDIR)/$(CURDIR)/C/include dst=$(AROS_ARCH_INCLUDES)/
 
 %copy_files_q mmake=external-openurl-fd files=openurl_lib.fd \
     src=fd dst=$(AROS_SDK_FD)

@@ -6169,7 +6169,7 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 $as_echo "$toolchain_needs_sysroot" >&6; }
 
 if test "$toolchain_needs_sysroot" = "yes" ; then
-    aros_toolchain_sysroot="--sysroot $""(AROS_SDK)"
+    aros_toolchain_sysroot="--sysroot $""(AROS_ARCH_SDK)"
 fi
 
 #AC_MSG_CHECKING([if we need to use --isysroot])

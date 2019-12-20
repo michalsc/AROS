@@ -18,7 +18,7 @@ HIDD_GALLIUM_FILES := gallium_init gallium_class
 #MM hidd-gallium : includes mesa3dgl-linklibs
 
 USER_INCLUDES += \
-            -I$(AROS_INCLUDES)/gallium \
+            -I$(AROS_ARCH_INCLUDES)/gallium \
             -iquote $(GALLIUM_PATH)/include \
             -iquote $(GALLIUM_PATH)/.. \
             -iquote $(SRCDIR)/$(CURDIR)

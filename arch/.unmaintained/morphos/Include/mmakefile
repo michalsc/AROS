@@ -12,22 +12,22 @@ INCSUBDIRS :=	aros \
 		
 
 INCLUDES      := $(foreach d,$(INCSUBDIRS),$(wildcard $(d)/*.*))
-DEST_INCLUDES := $(foreach f,$(INCLUDES),$(AROS_INCLUDES)/$(f))
+DEST_INCLUDES := $(foreach f,$(INCLUDES),$(AROS_ARCH_INCLUDES)/$(f))
 
 #MM- includes-morphos : setup-includes-morphos includes-copy-morphos
 #MM
 includes-copy-morphos : $(DEST_INCLUDES)
 
-$(AROS_INCLUDES)/%.h : %.h
+$(AROS_ARCH_INCLUDES)/%.h : %.h
 	@$(CP) $< $@
 
-$(AROS_INCLUDES)/%.c : %.c
+$(AROS_ARCH_INCLUDES)/%.c : %.c
 	@$(CP) $< $@
 
 #MM
 setup-includes-morphos :
-	@$(FOR) dir in $(AROS_INCLUDES)         \
-		$(foreach f,$(INCSUBDIRS),$(AROS_INCLUDES)/$(f)) \
+	@$(FOR) dir in $(AROS_ARCH_INCLUDES)         \
+		$(foreach f,$(INCSUBDIRS),$(AROS_ARCH_INCLUDES)/$(f)) \
 		$(GENINCDIR) \
 		$(foreach f,$(INCSUBDIRS),$(GENINCDIR)/$(f)) \
 	; do \
@@ -36,4 +36,4 @@ setup-includes-morphos :
 
 #MM
 clean :
-	-$(RM) $(AROS_INCLUDES)
+	-$(RM) $(AROS_ARCH_INCLUDES)

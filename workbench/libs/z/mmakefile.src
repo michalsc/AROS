@@ -32,10 +32,10 @@ INCLUDE_FILES := zlib.h zconf.h
 
 
 #MM
-workbench-libs-z-pc : $(AROS_LIB)/pkgconfig/zlib.pc
+workbench-libs-z-pc : $(AROS_ARCH_LIB)/pkgconfig/zlib.pc
 
-$(AROS_LIB)/pkgconfig/zlib.pc : $(SRCDIR)/$(CURDIR)/zlib.pc.aros
-	@$(IF) $(TEST) ! -d $(AROS_LIB)/pkgconfig ; then $(MKDIR) $(AROS_LIB)/pkgconfig ; else $(NOP) ; fi
+$(AROS_ARCH_LIB)/pkgconfig/zlib.pc : $(SRCDIR)/$(CURDIR)/zlib.pc.aros
+	@$(IF) $(TEST) ! -d $(AROS_ARCH_LIB)/pkgconfig ; then $(MKDIR) $(AROS_ARCH_LIB)/pkgconfig ; else $(NOP) ; fi
 	$(CP) $^ $@
 
 

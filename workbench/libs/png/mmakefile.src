@@ -28,25 +28,25 @@ USER_CPPFLAGS += -DPNG_NO_STDIO -DPNG_NO_WRITE_TIME
 	files=$(FILES) objdir=$(OBJDIR)/no_stdio
 
 #MM
-workbench-libs-png-pkgconfig : $(AROS_LIB)/pkgconfig/libpng.pc
+workbench-libs-png-pkgconfig : $(AROS_ARCH_LIB)/pkgconfig/libpng.pc
 
-$(AROS_LIB)/pkgconfig/libpng.pc : $(SRCDIR)/$(CURDIR)/libpng.pc.in $(SRCDIR)/$(CURDIR)/mmakefile.src
-	%mkdir_q dir=$(AROS_LIB)/pkgconfig
+$(AROS_ARCH_LIB)/pkgconfig/libpng.pc : $(SRCDIR)/$(CURDIR)/libpng.pc.in $(SRCDIR)/$(CURDIR)/mmakefile.src
+	%mkdir_q dir=$(AROS_ARCH_LIB)/pkgconfig
 	@$(SED) -e 's|@exec_prefix@|$${prefix}|' \
 	       -e 's|@includedir@/libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@|$${prefix}/include|' \
 	       -e 's|-lpng@PNGLIB_MAJOR@@PNGLIB_MINOR@|-lpng|' \
-	       -e 's|@libdir@|$(AROS_LIB)|' \
+	       -e 's|@libdir@|$(AROS_ARCH_LIB)|' \
 	       -e 's|@prefix@|/Developer|' \
 	       -e 's|@LIBS@||' \
 	       -e 's|@PNGLIB_VERSION@|1.6.3|' \
 	       -e 's| -I$${includedir}||' \
 	       $< >$@
 
-$(AROS_INCLUDES)/pnglibconf.h : $(SRCDIR)/$(CURDIR)/scripts/pnglibconf.h.prebuilt
+$(AROS_ARCH_INCLUDES)/pnglibconf.h : $(SRCDIR)/$(CURDIR)/scripts/pnglibconf.h.prebuilt
 	$(SED) "s|.*PNG_ERROR_NUMBERS_SUPPORTED.*|#if defined(__AROS__)\\n#define PNG_ERROR_NUMBERS_SUPPORTED\\n#else\\n/*#undef PNG_ERROR_NUMBERS_SUPPORTED*/\\n#endif|g" $< > $@
 
 #MM
-workbench-libs-png-generated : $(AROS_INCLUDES)/pnglibconf.h
+workbench-libs-png-generated : $(AROS_ARCH_INCLUDES)/pnglibconf.h
 
 #MM includes-copy
 INCLUDE_FILES := png.h pngconf.h

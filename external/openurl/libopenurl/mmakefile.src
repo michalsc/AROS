@@ -2,7 +2,7 @@ include $(SRCDIR)/config/aros.cfg
 
 #MM- linklibs : linklibs-openurl
 
-OPENURL_LIB := $(AROS_LIB)/libopenurl.a
+OPENURL_LIB := $(AROS_ARCH_LIB)/libopenurl.a
 
 #MM- linklibs-openurl: includes linklibs-openurl-quick
 #MM linklibs-openurl-quick : linklibs-openurl-setup 
@@ -23,4 +23,4 @@ $(OBJDIR)/%.o : %.c
 #MM
 linklibs-openurl-setup :
 	%mkdirs_q $(OBJDIR)
-	%mkdirs_q $(AROS_LIB)
+	%mkdirs_q $(AROS_ARCH_LIB)

@@ -82,7 +82,7 @@ $(AROSARCHDIR)/kernel: $(KOBJSDIR)/kernel_resource.o $(KOBJSDIR)/exec_library.o
 	@$(ECHO) "Linking    $(AROS_DIR_ARCH)/kernel"
 	$(TARGET_CC) -nostartfiles -Wl,-Map -Wl,$(OSGENDIR)/boot/kernel.map -Wl,-T -Wl,$(SRCDIR)/$(CURDIR)/ldscript.lds \
         -o $@ $(KOBJSDIR)/kernel_resource.o $(KOBJSDIR)/exec_library.o \
-        -L$(AROS_LIB) -larossupport -lamiga -lautoinit -llibinit -lstdc.static -lgcc
+        -L$(AROS_ARCH_LIB) -larossupport -lamiga -lautoinit -llibinit -lstdc.static -lgcc
 
 TARGET_ISO := $(DISTDIR)/aros$(AROS_TARGET_SUFFIX)-$(AROS_TARGET_ARCH)-$(AROS_TARGET_CPU).iso
 

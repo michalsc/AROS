@@ -510,7 +510,7 @@ endif
 # Adjust compiler flags to suit ObjC
 %(mmake)_OBJC_CPPFLAGS :=  %(cppflags)
 %(mmake)_OBJCFLAGS := %(cflags)
-%(mmake)_OBJCFLAGS := $(%(mmake)_OBJCFLAGS) -isystem $(AROS_SDK)/include
+%(mmake)_OBJCFLAGS := $(%(mmake)_OBJCFLAGS) -isystem $(AROS_ARCH_SDK)/include
 %(mmake)_OBJCFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(%(mmake)_OBJCFLAGS)))
 ifeq (%(dflags),)
   %(mmake)_OBJCDFLAGS := %(cflags)
@@ -872,7 +872,7 @@ endif
 # Adjust compiler flags to suit ObjC
 %(mmake)_MOBJC_CPPFLAGS := %(cppflags)
 %(mmake)_OBJCFLAGS := %(cflags)
-%(mmake)_OBJCFLAGS := $(%(mmake)_OBJCFLAGS) -isystem $(AROS_SDK)/include
+%(mmake)_OBJCFLAGS := $(%(mmake)_OBJCFLAGS) -isystem $(AROS_ARCH_SDK)/include
 %(mmake)_OBJCFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(%(mmake)_OBJCFLAGS)))
 ifeq (%(dflags),)
   %(mmake)_OBJCDFLAGS := %(cflags)
@@ -1049,7 +1049,7 @@ endif
 # Add trailing /
 %(mmake)-link_DIRS := $(subst //,/,$(addsuffix /,$(%(mmake)-link_DIRS)))
 # Add normal linklib path
-%(mmake)-link_DIRS += $(AROS_LIB)/
+%(mmake)-link_DIRS += $(AROS_ARCH_LIB)/
 # add lib and .a to static linklib names
 %(mmake)-link_LIBS := $(addprefix lib,$(addsuffix .a,%(uselibs) $(%(mmake)-link_EXTRA_LIBS)))
 ifeq (%(usestartup),yes)
@@ -1100,7 +1100,7 @@ endif
 # Add trailing /
 %(mmake)-link_DIRS := $(subst //,/,$(addsuffix /,$(%(mmake)-link_DIRS)))
 # Add normal linklib path
-%(mmake)-link_DIRS += $(AROS_LIB)/
+%(mmake)-link_DIRS += $(AROS_ARCH_LIB)/
 # add lib and .a to static linklib names
 %(mmake)-link_LIBS := $(addprefix lib,$(addsuffix .a,%(uselibs) $(%(mmake)-link_EXTRA_LIBS)))
 # search for the linklibs in the given path, ignore ones not found
@@ -1120,7 +1120,7 @@ $(%(mmake)-link_PROGS) : %(targetdir)/% : %(objdir)/%.o $(%(mmake)-link_DEPLIBS)
 
 #------------------------------------------------------------------------------
 # Link the %(objs) to the library %(libdir)/lib%(libname).a
-%define rule_link_linklib mmake=TMP libname=/A objs=/A libdir=$(AROS_LIB) linker=target
+%define rule_link_linklib mmake=TMP libname=/A objs=/A libdir=$(AROS_ARCH_LIB) linker=target
 
 ifeq (%(linker),target)
 %(libdir)/lib%(libname).a : %(mmake)_AR:=$(AR)
@@ -1155,7 +1155,7 @@ endif
 # Add trailing /
 %(mmake)_DIRS := $(subst //,/,$(addsuffix /,$(%(mmake)_DIRS)))
 # Add normal linklib path
-%(mmake)_DIRS += $(AROS_LIB)/
+%(mmake)_DIRS += $(AROS_ARCH_LIB)/
 # add lib and .a to static linklib names
 %(mmake)_LIBS := $(addprefix lib,$(addsuffix .a,%(uselibs)))
 # search for the linklibs in the given path, ignore ones not found
@@ -1994,7 +1994,7 @@ $(%(mmake)_KOBJ) : FILTBASES:=$(addprefix -L ,$(%(mmake)_SYMBOLS))
 $(%(mmake)_KOBJ) : USER_LDFLAGS := $(USER_LDFLAGS)
 $(%(mmake)_KOBJ) : $(%(mmake)_OBJS) $(%(mmake)_ENDOBJS)
 	$(Q)$(ECHO) "Linking    $(subst $(TARGETDIR)/,,$@)"
-	$(Q)$(AROS_LD) -Ur -o $@ $^ $(USER_LDFLAGS) -L$(AROS_LIB) $(addprefix -l,$(LINKLIBS))
+	$(Q)$(AROS_LD) -Ur -o $@ $^ $(USER_LDFLAGS) -L$(AROS_ARCH_LIB) $(addprefix -l,$(LINKLIBS))
 	$(Q)$(OBJCOPY) $@ $(FILTBASES) `$(NM_PLAIN) $@ | $(AWK) '($$3 ~ /^__.*_(LIST|END)__\r?$$/) || ($$3 ~ /^__aros_lib.*\r?$$/) {print "-L " $$3;}'`
 
 
@@ -2186,7 +2186,7 @@ endif
 ifneq (%(includedir),)
 %(mmake)%(flavour)_INCDIR           := %(includedir)
 else
-%(mmake)%(flavour)_INCDIR           := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_SDK)/$(AROS_DIR_INCLUDE)
+%(mmake)%(flavour)_INCDIR           := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_ARCH_SDK)/$(AROS_DIR_INCLUDE)
 endif
 %(mmake)%(flavour)_LIBDEFSINC       := $(%(mmake)%(flavour)_OBJDIR)/include/$(%(mmake)%(flavour)_DEFNAME)_libdefs.h
 %(mmake)%(flavour)_DEFLIBDEFSINC    := $(%(mmake)%(flavour)_OBJDIR)/include/$(%(mmake)%(flavour)_DEFNAME)_deflibdefs.h
@@ -2327,7 +2327,7 @@ else
 endif
 
 ifeq (%(libdir),)
-%(mmake)%(flavour)_LIBDIR           := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_SDK)/$(AROS_DIR_LIB)
+%(mmake)%(flavour)_LIBDIR           := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_ARCH_SDK)/$(AROS_DIR_LIB)
 else
 %(mmake)%(flavour)_LIBDIR           := %(libdir)
 endif
@@ -2508,7 +2508,7 @@ $(%(mmake)%(flavour)_KOBJ) : FILTBASES:=$(addprefix -L ,$(%(mmake)%(flavour)_SYM
 $(%(mmake)%(flavour)_KOBJ) : USER_LDFLAGS:=$(USER_LDFLAGS)
 $(%(mmake)%(flavour)_KOBJ) : $(%(mmake)%(flavour)_OBJS) $(USER_OBJS) $(%(mmake)%(flavour)_ENDOBJS)
 	$(Q)$(ECHO) "Linking    $(subst $(TARGETDIR)/,,$@)"
-	$(Q)$(AROS_LD) -Ur -o $@ $^ $(USER_LDFLAGS) -L$(AROS_LIB) $(addprefix -l,$(LINKLIBS))
+	$(Q)$(AROS_LD) -Ur -o $@ $^ $(USER_LDFLAGS) -L$(AROS_ARCH_LIB) $(addprefix -l,$(LINKLIBS))
 	$(Q)$(OBJCOPY) $@ $(FILTBASES) `$(NM_PLAIN) $@ | $(AWK) '($$3 ~ /^__.*_(LIST|END)__\r?$$/) || ($$3 ~ /^__aros_lib.*\r?$$/) {print "-L " $$3;}'`
 endif
 
@@ -2647,13 +2647,13 @@ endif # $(TARGET) in $(%(mmake)%(flavour)_ALLTARGETS)
 # - objs additional object to link into the linklib. The objects have to be
 #   given with full absolute path and the .o suffix.
 # - objdir is where the .o are generated. Defaults to $(GENDIR)/$(CURDIR)
-# - libdir is the directory where the linklib will be placed (default $(AROS_LIB))
+# - libdir is the directory where the linklib will be placed (default $(AROS_ARCH_LIB))
 # - cflags are the flags to compile the source. if none are specified the defaults
 #   for the chosen (host/kernel/target) compiler are used.
 # - dflags are the flags used during makedepend (default equal to cflags)
 # - aflags are the flags used during assembling (default $(AFLAGS))
 %define build_linklib mmake=/A libname=/A files= objcfiles= cxxfiles= \
-  asmfiles= objs= objdir=$(GENDIR)/$(CURDIR) libdir=$(AROS_LIB) \
+  asmfiles= objs= objdir=$(GENDIR)/$(CURDIR) libdir=$(AROS_ARCH_LIB) \
   includedir= srcdir= \
   cppflags=$(CPPFLAGS) cflags= dflags= cxxflags= dxxflags= \
   aflags=$(AFLAGS) compiler=target lto=$(TARGET_LTO) usetree=no
@@ -3115,13 +3115,13 @@ endif
 
 #------------------------------------------------------------------------------
 #   Copy include files into the includes directories. There are currently
-#   two include directories. One for building AROS $(AROS_INCLUDES) and one
+#   two include directories. One for building AROS $(AROS_ARCH_INCLUDES) and one
 #   for building tools that need to run on the host system $(GENINCDIR). The
 #   $(GENINCDIR) path must not contain any references to the C runtime
 #   library header files.
 #
 %define copy_includes mmake=includes-copy includes=$(INCLUDE_FILES) path=. \
-    dir= compiler=target includedir=$(AROS_INCLUDES)
+    dir= compiler=target includedir=$(AROS_ARCH_INCLUDES)
 
 ifeq ($(findstring %(compiler),host kernel target),)
 $(error %copy_includes: compiler argument (%(compiler)) has to be host, kernel or target)
@@ -3177,7 +3177,7 @@ STUBS_SRC := $(addprefix $(SRCDIR)/$(CURDIR)/,$(addsuffix .c,$(STUBS)))
 STUBS_MEM := $(addsuffix .o,$(STUBS))
 STUBS_OBJ := $(addprefix $(OBJDIR)/,$(STUBS_MEM))
 STUBS_DEP := $(addprefix $(OBJDIR)/,$(addsuffix .d,$(STUBS)))
-HIDD_LIB := $(AROS_LIB)/libhiddstubs.a
+HIDD_LIB := $(AROS_ARCH_LIB)/libhiddstubs.a
 
 #MM- linklibs : hidd-%(hidd)-stubs
 #MM- %(parenttarget): hidd-%(hidd)-stubs
@@ -3194,7 +3194,7 @@ $(STUBS_DEP) : $(STUBS_SRC)
 	%mkdepend_q flags="$(strip %(dflags) %(cppflags))"
 
 setup ::
-	%mkdirs_q $(OBJDIR) $(AROS_LIB)
+	%mkdirs_q $(OBJDIR) $(AROS_ARCH_LIB)
 
 #MM
 clean ::
@@ -3284,9 +3284,9 @@ DEPS := $(DEPS) $(STUBS_DEP)
 #    # Install options
 #    bindir = $(prefix)
 #    sbindir = $(prefix)
-#    libdir = $(AROS_LIB)
-#    includedir = $(AROS_INCLUDES)
-#    oldincludedir = $(AROS_INCLUDES)
+#    libdir = $(AROS_ARCH_LIB)
+#    includedir = $(AROS_ARCH_INCLUDES)
+#    oldincludedir = $(AROS_ARCH_INCLUDES)
 # endif
 #
 
@@ -3390,8 +3390,8 @@ else
 
     %(mmake)-install_opts := bindir=$(%(mmake)-prefix) \
         sbindir=$(%(mmake)-prefix) \
-        libdir=$(AROS_LIB) includedir=$(AROS_INCLUDES) \
-        oldincludedir=$(AROS_INCLUDES) %(install_env)
+        libdir=$(AROS_ARCH_LIB) includedir=$(AROS_ARCH_INCLUDES) \
+        oldincludedir=$(AROS_ARCH_INCLUDES) %(install_env)
 endif
 
 ifneq ($(DEBUG),yes)
@@ -3446,7 +3446,7 @@ endif
 endif
 ifeq (%(compiler),target)
     %(mmake)-cfg-env := %(config_env_extra) \
-        PKG_CONFIG_LIBDIR="$(AROS_SDK)/lib/pkgconfig" \
+        PKG_CONFIG_LIBDIR="$(AROS_ARCH_SDK)/lib/pkgconfig" \
         PKG_CONFIG_SYSROOT_DIR="$(AROSDIR)"
     %(mmake)-cfg-env += CPP="$(strip $(TARGET_CPP) $(TARGET_SYSROOT))" \
         CXXCPP="$(strip $(TARGET_CPP) $(TARGET_SYSROOT))" \
@@ -3458,7 +3458,7 @@ ifeq (%(compiler),target)
 ifeq (%(usecppflags),yes)
     %(mmake)-cfg-env += CPPFLAGS="$(strip $(BASE_CPPFLAGS) $(USER_CPPFLAGS) %(extracppflags))"
 endif
-    %(mmake)-cfg-env += LDFLAGS="$(strip -L$(AROS_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))"
+    %(mmake)-cfg-env += LDFLAGS="$(strip -L$(AROS_ARCH_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))"
 ifeq (%(usecppflags),yes)
     %(mmake)-cfg-env += CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)"
 endif
@@ -3472,20 +3472,20 @@ ifeq (%(usecppflags),yes)
     %(mmake)-cfg-env += CPPFLAGS_FOR_HOST="$(strip $(BASE_CPPFLAGS) $(USER_CPPFLAGS) %(extracppflags))"
 endif
     %(mmake)-cfg-env += CC_FOR_HOST="$(strip $(TARGET_CC) $(TARGET_SYSROOT))" \
-        CFLAGS_FOR_HOST="$(strip %(hostisaflags) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) -L$(AROS_SDK)/lib %(extracflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
+        CFLAGS_FOR_HOST="$(strip %(hostisaflags) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) -L$(AROS_ARCH_SDK)/lib %(extracflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
         CXX_FOR_HOST="$(strip $(TARGET_CXX) $(TARGET_SYSROOT))" \
-        CXXFLAGS_FOR_HOST="$(strip %(hostisaflags) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) -L$(AROS_SDK)/lib %(extracxxflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
+        CXXFLAGS_FOR_HOST="$(strip %(hostisaflags) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) -L$(AROS_ARCH_SDK)/lib %(extracxxflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
         LD_FOR_HOST="$(strip $(TARGET_LD))" \
-        LDFLAGS_FOR_HOST="$(strip -L$(AROS_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))"
+        LDFLAGS_FOR_HOST="$(strip -L$(AROS_ARCH_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))"
 ifeq (%(usecppflags),yes)
     %(mmake)-cfg-env += CPPFLAGS_FOR_TARGET="$(strip $(BASE_CPPFLAGS) $(USER_CPPFLAGS) %(extracppflags))"
 endif
     %(mmake)-cfg-env += CC_FOR_TARGET="$(strip $(TARGET_CC) $(TARGET_SYSROOT))" \
-        CFLAGS_FOR_TARGET="$(strip $(%(mmake)-TARGET_CFLAGS) -L$(AROS_SDK)/lib %(extracflags))" \
+        CFLAGS_FOR_TARGET="$(strip $(%(mmake)-TARGET_CFLAGS) -L$(AROS_ARCH_SDK)/lib %(extracflags))" \
         CXX_FOR_TARGET="$(strip $(TARGET_CXX) $(TARGET_SYSROOT))" \
-        CXXFLAGS_FOR_TARGET="$(strip $(%(mmake)-TARGET_CXXFLAGS) -L$(AROS_SDK)/lib %(extracxxflags))" \
+        CXXFLAGS_FOR_TARGET="$(strip $(%(mmake)-TARGET_CXXFLAGS) -L$(AROS_ARCH_SDK)/lib %(extracxxflags))" \
         LD_FOR_TARGET="$(strip $(TARGET_LD))" \
-        LDFLAGS_FOR_TARGET="$(strip -L$(AROS_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
+        LDFLAGS_FOR_TARGET="$(strip -L$(AROS_ARCH_SDK)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
         AR="$(strip $(AR_PLAIN))" \
         AS="$(strip $(TARGET_AS))" \
         OBJCOPY="$(strip $(OBJCOPY))" \
@@ -4176,7 +4176,7 @@ GNU_REPOSITORY := gnu://
 #------------------------------------------------------------------------------
 # Same job as the one of %fetch_and_build_gnu, except that this one assumes
 # that the package is a "Developer" package, and as such it needs to be placed
-# under the $(AROS_SDK) directory, as a default.
+# under the $(AROS_ARCH_SDK) directory, as a default.
 #
 # All the arguments have the same meaning as the ones of the %fetch_and_build_gnu
 # macro, but notice that %fetch_and_build_gnu_development *doesn't* have a
@@ -4185,7 +4185,7 @@ GNU_REPOSITORY := gnu://
 #     #MM- development-%(package)
 
 %define fetch_and_build_gnu_development package=/A subpackage= version=/A  crossbuild=no suffixes="tar.bz2 tar.gz" \
-    srcdir= package_repo= patch=no patch_repo= prefix=$(AROS_SDK) \
+    srcdir= package_repo= patch=no patch_repo= prefix=$(AROS_ARCH_SDK) \
     aros_prefix=/Developer config_env_extra= preconfigure= postconfigure= postinstall= \
     extraoptions= \
     usecppflags=yes extracppflags= \
@@ -4314,7 +4314,7 @@ TMP_DIRS         := $(patsubst -L%,%,$(filter -L%,$(TMP_DIRS)))
 # Add trailing /
 TMP_DIRS         := $(subst //,/,$(addsuffix /,$(TMP_DIRS)))
 # Add normal linklib path
-TMP_DIRS         += $(AROS_LIB)/
+TMP_DIRS         += $(AROS_ARCH_LIB)/
 # add lib and .a to static linklib names
 TMP_LIBS         := $(addprefix lib,$(addsuffix .a,%(uselibs)))
 # search for the linklibs in the given path, ignore ones not found

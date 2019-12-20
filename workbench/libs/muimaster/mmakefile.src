@@ -417,7 +417,7 @@ FILES         := $(FILES) $(CLASSFILES)
     uselibs="coolimages stdc"
 
 BUILDINCTOOL := $(GENDIR)/$(CURDIR)/buildincludes
-INCLUDEFILES := $(AROS_INCLUDES)/libraries/mui.h $(GENINCDIR)/libraries/mui.h
+INCLUDEFILES := $(AROS_ARCH_INCLUDES)/libraries/mui.h $(GENINCDIR)/libraries/mui.h
 
 #MM- includes-generate-deps : includes-libraries-mui
 #MM- core-linklibs : linklibs-muimaster
@@ -426,14 +426,14 @@ INCLUDEFILES := $(AROS_INCLUDES)/libraries/mui.h $(GENINCDIR)/libraries/mui.h
 includes-libraries-mui : includes-mui-setup $(INCLUDEFILES)
 	@$(NOP)
 
-includes-mui-setup : $(GENINCDIR)/libraries $(AROS_INCLUDES)/libraries
+includes-mui-setup : $(GENINCDIR)/libraries $(AROS_ARCH_INCLUDES)/libraries
 
 %copy_includes includes=customclasses.h path=zune
 
-$(GENINCDIR)/libraries $(AROS_INCLUDES)/libraries :
+$(GENINCDIR)/libraries $(AROS_ARCH_INCLUDES)/libraries :
 	%mkdir_q dir=$@
 
-$(AROS_INCLUDES)/libraries/mui.h : $(GENINCDIR)/libraries/mui.h
+$(AROS_ARCH_INCLUDES)/libraries/mui.h : $(GENINCDIR)/libraries/mui.h
 	@$(ECHO) "Copying    $< to $@"
 	@$(CP) $< $@
 

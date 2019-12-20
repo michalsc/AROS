@@ -8,7 +8,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM     kernel-utility-includes
 
 %copy_dir_recursive mmake=workbench-libs-codesets-includes \
-    src=$(SRCDIR)/$(CURDIR)/include dst=$(AROS_INCLUDES)/
+    src=$(SRCDIR)/$(CURDIR)/include dst=$(AROS_ARCH_INCLUDES)/
 
 %copy_files_q mmake=workbench-libs-codesets-fd files=codesets_lib.fd \
     src=fd dst=$(AROS_SDK_FD)

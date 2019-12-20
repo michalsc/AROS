@@ -54,9 +54,9 @@ ARCH_INCLUDES := $(subst $(ARCHINCDIR),,$(foreach d,$(addprefix $(ARCHINCDIR),$(
 ARCHFAMILY_INCLUDES := $(subst $(ARCHFAMILYINCDIR),,$(foreach d,$(addprefix $(ARCHFAMILYINCDIR),$(INCSUBDIRS)),$(wildcard $(d)/*.h) $(wildcard $(d)/*.hpp)))
 # ARCH > FAMILY > GENERIC
 INCLUDES      := $(filter-out $(strip $(ARCH_INCLUDES) $(filter-out $(ARCH_INCLUDES),$(ARCHFAMILY_INCLUDES))),$(INCLUDES))
-DEST_INCLUDES := $(foreach f,$(INCLUDES),$(AROS_INCLUDES)/$(f))
+DEST_INCLUDES := $(foreach f,$(INCLUDES),$(AROS_ARCH_INCLUDES)/$(f))
 GEN_INCLUDES  := $(foreach f,$(INCLUDES),$(GENINCDIR)/$(f))
-INCL_DIRS     := $(foreach dir,$(INCSUBDIRS) $(INCEMPTYDIRS),$(AROS_INCLUDES)/$(dir)) \
+INCL_DIRS     := $(foreach dir,$(INCSUBDIRS) $(INCEMPTYDIRS),$(AROS_ARCH_INCLUDES)/$(dir)) \
                  $(foreach dir,$(INCSUBDIRS) $(INCEMPTYDIRS),$(GENINCDIR)/$(dir))
 
 #MM- includes : includes-generate
@@ -89,27 +89,27 @@ ifneq ($(strip $(EXECSMP)),"")
 	$(SED) -i -e 's/.*ThisTask;.*/    IPTR         SMPPrivate1;/' -e 's/.*Quantum;.*/    WORD         SMPPrivate2;/' -e 's/.*Elapsed;.*/    WORD         SMPPrivate3;/' -e 's/.*IDNestCnt;.*/    UBYTE        SMPPrivate4;/' -e 's/.*TDNestCnt;.*/    UBYTE        SMPPrivate5;/' $@
 endif
 
-$(AROS_INCLUDES)/exec/execbase.h : $(GENINCDIR)/exec/execbase.h
-	@$(ECHO) "Copying    C   includes to $(AROS_INCLUDES)..."
+$(AROS_ARCH_INCLUDES)/exec/execbase.h : $(GENINCDIR)/exec/execbase.h
+	@$(ECHO) "Copying    C   includes to $(AROS_ARCH_INCLUDES)..."
 	@$(CP) $< $@
 
 #MM
-includes-execbase_h : $(AROS_INCLUDES)/exec/execbase.h
+includes-execbase_h : $(AROS_ARCH_INCLUDES)/exec/execbase.h
 
 .PHONY : includes-execbase_h
 
 # normal include copy routines
 
-$(AROS_INCLUDES)/%.h : $(SRCDIR)/$(CURDIR)/%.h
-	@$(ECHO) "Copying    C   includes to $(AROS_INCLUDES)..."
+$(AROS_ARCH_INCLUDES)/%.h : $(SRCDIR)/$(CURDIR)/%.h
+	@$(ECHO) "Copying    C   includes to $(AROS_ARCH_INCLUDES)..."
 	@$(CP) $< $@
 
 $(GENINCDIR)/%.h : $(SRCDIR)/$(CURDIR)/%.h
 	@$(ECHO) "Copying    C   includes to $(GENINCDIR)..."
 	@$(CP) $< $@
 
-$(AROS_INCLUDES)/%.hpp : $(SRCDIR)/$(CURDIR)/%.hpp
-	@$(ECHO) "Copying    C++ includes to $(AROS_INCLUDES)..."
+$(AROS_ARCH_INCLUDES)/%.hpp : $(SRCDIR)/$(CURDIR)/%.hpp
+	@$(ECHO) "Copying    C++ includes to $(AROS_ARCH_INCLUDES)..."
 	@$(CP) $< $@
 
 $(GENINCDIR)/%.hpp : $(SRCDIR)/$(CURDIR)/%.hpp
@@ -143,5 +143,5 @@ $(GENINCDIR)/aros/$(CPU) :
 
 #MM
 clean :
-	-$(RM) $(AROS_INCLUDES) $(GENINCDIR)
+	-$(RM) $(AROS_ARCH_INCLUDES) $(GENINCDIR)
 

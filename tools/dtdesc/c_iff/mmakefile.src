@@ -23,9 +23,9 @@ FILES := \
 %build_linklib mmake=linklibs-c_iff libname=c_iff files=$(FILES)
 
 #MM
-includes-copy : $(AROS_INCLUDES)/c_iff.h
+includes-copy : $(AROS_ARCH_INCLUDES)/c_iff.h
 
-$(AROS_INCLUDES)/%.h : %.h
-	$(CP) $< $(AROS_INCLUDES)
+$(AROS_ARCH_INCLUDES)/%.h : %.h
+	$(CP) $< $(AROS_ARCH_INCLUDES)
 
 %common

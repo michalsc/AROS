@@ -38,7 +38,7 @@ FILES := $(LIBBASEFILES) $(LIBHANDLINGFILES) $(STARTUPFILES) $(MISCFILES)
 
 %copy_includes includes="autoinit.h detach.h" path=aros
 
-%copy_files_q mmake=linklibs-autoinit-autofile files=$(AUTOFILE) dst=$(AROS_LIB)
+%copy_files_q mmake=linklibs-autoinit-autofile files=$(AUTOFILE) dst=$(AROS_ARCH_LIB)
 
 %build_linklib mmake=linklibs-autoinit libname=autoinit files=$(FILES)
 

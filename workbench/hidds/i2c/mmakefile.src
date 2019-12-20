@@ -13,10 +13,10 @@ USER_LDFLAGS := -static
 FILES	:= i2c_init i2cdeviceclass i2cclass
 
 #MM
-includes-copy : $(AROS_INCLUDES)/hidd/i2c.h $(GENINCDIR)/hidd/i2c.h
+includes-copy : $(AROS_ARCH_INCLUDES)/hidd/i2c.h $(GENINCDIR)/hidd/i2c.h
 
-$(AROS_INCLUDES)/hidd/i2c.h: include/i2c.h
-	$(CP) $< $(AROS_INCLUDES)/hidd/i2c.h
+$(AROS_ARCH_INCLUDES)/hidd/i2c.h: include/i2c.h
+	$(CP) $< $(AROS_ARCH_INCLUDES)/hidd/i2c.h
 
 $(GENINCDIR)/hidd/i2c.h: include/i2c.h
 	$(CP) $< $(GENINCDIR)/hidd/i2c.h

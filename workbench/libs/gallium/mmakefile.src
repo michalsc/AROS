@@ -9,7 +9,7 @@ GALLIUM_PATH = $(top_srcdir)/src/gallium
 #MM workbench-libs-gallium : includes hidd-gallium
 
 USER_INCLUDES += \
-            -I$(AROS_INCLUDES)/gallium \
+            -I$(AROS_ARCH_INCLUDES)/gallium \
             -iquote $(GALLIUM_PATH)/include
 #USER_CPPFLAGS +=-DDEBUG=1
 

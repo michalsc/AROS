@@ -60,8 +60,8 @@ NOUVEAU_HIDD_C_SOURCES := \
             nouveau_compositorclass \
             $(addprefix $(DRM_PATH),$(AROS_DRM_CORE_SOURCES))           \
             $(addprefix $(DRM_PATH),$(AROS_DRM_NVIDIA_SOURCES))         \
-            $(addprefix $(DRM_PATH),$(AROS_LIBDRM_CORE_SOURCES))        \
-            $(addprefix $(DRM_PATH),$(AROS_LIBDRM_NVIDIA_SOURCES))      \
+            $(addprefix $(DRM_PATH),$(AROS_ARCH_LIBDRM_CORE_SOURCES))        \
+            $(addprefix $(DRM_PATH),$(AROS_ARCH_LIBDRM_NVIDIA_SOURCES))      \
             $(addprefix $(GALLIUM_PATH)/drivers/nouveau/, $(GALLIUM_NOUVEAU_C_SOURCES:.c=)) \
             $(addprefix $(XF86_NOUVEAU_PATH), $(XF86_NOUVEAU_SOURCES))  \
 

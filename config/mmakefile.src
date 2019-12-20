@@ -7,7 +7,7 @@ clean ::
 
 #MM
 machine : $(SRCDIR)/$(CURDIR)/machine.c
-	$(HOST_CC) -idirafter $(AROS_INCLUDES) -o machine $(SRCDIR)/$(CURDIR)/machine.c
+	$(HOST_CC) -idirafter $(AROS_ARCH_INCLUDES) -o machine $(SRCDIR)/$(CURDIR)/machine.c
 	./machine
 
 #MM- AROS : kernel kernel-$(ARCH)-$(CPU)-$(AROS_TARGET_VARIANT) kernel-$(ARCH)-$(CPU) kernel-$(FAMILY)

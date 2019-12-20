@@ -93,7 +93,7 @@ OPTIMIZATION_CFLAGS := -Os
 
 USELIBS := amiga arossupport autoinit libinit stdc.static
 LIBS    := -L$(GENDIR)/lib -lloadseg $(addprefix -l,$(USELIBS))
-DEPLIBS := $(addprefix $(AROS_LIB)/lib,$(addsuffix .a,$(USELIBS)))
+DEPLIBS := $(addprefix $(AROS_ARCH_LIB)/lib,$(addsuffix .a,$(USELIBS)))
 
 # Force rebuilding, so that we always get new date strings
 rom_entry.o: FORCE
@@ -200,7 +200,7 @@ $(GENDIR)/boot/aros-amiga-m68k-reloc.elf : $(DEPLIBS) $(SRCDIR)/$(CURDIR)/mmakef
 		-Wl,--defsym -Wl,AbsExecBase=0x4 \
 		-m68000 \
 		-o $@ -Wl,-T -Wl,$(SRCDIR)/$(CURDIR)/aros-rom.ld \
-		-L$(AROS_LIB) $(LIBS) -lgcc
+		-L$(AROS_ARCH_LIB) $(LIBS) -lgcc
 
 $(GENDIR)/boot/aros-amiga-m68k.elf: $(GENDIR)/boot/aros-amiga-m68k-reloc.elf
 	$(Q)$(KERNEL_LD) -o $@ \
@@ -343,7 +343,7 @@ $(GENDIR)/boot/aros-amiga-m68k-ram.elf : $(DEPLIBS) $(SRCDIR)/$(CURDIR)/mmakefil
 		-Wl,--defsym -Wl,AbsExecBase=0x4 \
 		-m68000 \
 		-o $@ -Wl,-T -Wl,$(SRCDIR)/$(CURDIR)/aros-ram.ld \
-		-L$(AROS_LIB) $(LIBS) -lgcc
+		-L$(AROS_ARCH_LIB) $(LIBS) -lgcc
 
 
 $(AROSARCHDIR)/aros.elf: $(GENDIR)/boot/aros-amiga-m68k-ram.elf \
@@ -371,7 +371,7 @@ $(AROSARCHDIR)/aros.elf.dbg : $(DEPLIBS) $(SRCDIR)/$(CURDIR)/mmakefile.src \
 		-Wl,--defsym -Wl,AbsExecBase=0x4 \
 		-m68000 \
 		-o $@ -Wl,-T -Wl,$(SRCDIR)/$(CURDIR)/aros-dbg.ld \
-		-L$(AROS_LIB) $(LIBS) -lgcc; \
+		-L$(AROS_ARCH_LIB) $(LIBS) -lgcc; \
 		$(TARGET_OBJCOPY) --add-gnu-debuglink=$@ $(AROSARCHDIR)/aros.elf; \
 	fi
 

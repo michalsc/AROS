@@ -73,7 +73,7 @@ $(GENDIR)/$(CURDIR)/.includes-generated : $(GENMODULE)
 	@$(GENMODULE) -c $(SRCDIR)/$(CURDIR)/gl.conf -d $(GENDIR)/$(CURDIR)/include writeincludes gl library
 	@$(GENMODULE) -c $(SRCDIR)/$(CURDIR)/gl.conf -d $(GENDIR)/$(CURDIR)/include writelibdefs gl library
 	@$(GENMODULE) -c $(SRCDIR)/$(CURDIR)/gl.conf -d $(GENDIR)/include writeincludes gl library
-	@$(GENMODULE) -c $(SRCDIR)/$(CURDIR)/gl.conf -d $(AROS_INCLUDES) writeincludes gl library
+	@$(GENMODULE) -c $(SRCDIR)/$(CURDIR)/gl.conf -d $(AROS_ARCH_INCLUDES) writeincludes gl library
 	@$(TOUCH) $@
 
 INCLUDE_FILES := gla.h

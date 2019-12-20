@@ -27,7 +27,7 @@ USER_LDFLAGS := -static
     files="unixio_class unixpkt_class" archspecific=yes
 
 MY_INCLS := $(call WILDCARD, include/*.h)
-DEST_INC := $(foreach f,$(MY_INCLS), $(AROS_INCLUDES)/hidd/$(notdir $f))
+DEST_INC := $(foreach f,$(MY_INCLS), $(AROS_ARCH_INCLUDES)/hidd/$(notdir $f))
 GEN_INC	 := $(foreach f,$(MY_INCLS), $(GENINCDIR)/hidd/$(notdir $f))
 
 INCLUDE_FILES    := $(call WILDCARD, include/*.h)

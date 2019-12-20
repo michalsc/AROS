@@ -18,7 +18,7 @@ EXEDIR := $(AROSDIR)
 
 NOWARN_FLAGS := $(NOWARN_POINTER_SIGN)
 AHI_CFLAGS := $(NOWARN_FLAGS) $(CFLAGS_NO_BUILTIN_FLOOR) $(OPTIMIZATION_CFLAGS)
-AHI_OPTIONS=--with-os-includedir=$(AROS_INCLUDES)
+AHI_OPTIONS=--with-os-includedir=$(AROS_ARCH_INCLUDES)
 
 # AHI's configure will not set its needed preprocessor flags if we already provide them (even if empty)
 # so we disable their use in build_with_configure.
