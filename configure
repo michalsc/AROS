@@ -9401,6 +9401,31 @@ case "$target_os" in
                 aros_target_mkdep="$aros_target_mkdep -Darm"
                 aros_c_libs="$aros_c_libs -laeabi"
                 ;;
+            *m68k*)
+                aros_elf_translate="$""(ELF2HUNK)"
+                make_extra_commands="$export_newline""ELF2HUNK	:= $""(TOOLDIR)/elf2hunk$""(HOST_EXE_SUFFIX)$export_newline"
+                aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -D_AMIGA -DAMIGA"
+                aros_shared_default="no"
+                # Check whether --enable-amigaos_compliance was given.
+if test "${enable_amigaos_compliance+set}" = set; then :
+  enableval=$enable_amigaos_compliance; aros_amigaos_compliance="$enableval"
+fi
+                aros_enable_mmu=no
+                aros_target_cpu="m68k"
+                aros_object_format="m68kelf"
+                aros_flavour="standcompat"
+                gcc_target_cpu="m68020"
+                aros_isa_flags="$""(ISA_MC68020_FLAGS)"
+                aros_nowarn_flags="$aros_nowarn_flags NOWARN_VOLATILE_REGISTER_VAR"
+                aros_config_cppflags="$aros_config_cppflags -DNOLIBINLINE"
+                aros_config_cflags="$aros_config_cflags $""(CFLAGS_NO_STRICT_ALIASING) $""(CFLAGS_FREESTANDING) $""(CFLAGS_OMIT_FP) $""(CFLAGS_BUILTIN)"
+                aros_config_cxxflags="$aros_config_cxxflags $""(CFLAGS_NO_STRICT_ALIASING) $""(CFLAGS_FREESTANDING) $""(CFLAGS_OMIT_FP) $""(CFLAGS_BUILTIN)"
+                if test "$optimization" = "default"; then
+                    optimization_level=$toolchain_size_opt_lvl
+                fi
+                aros_config_aflags="$aros_config_aflags"
+                aros_target_strip_flags="-R.comment --strip-debug"
+                ;;
             *)
                 as_fn_error $? "\"Unknown CPU for RasPi $target_cpu\"" "$LINENO" 5
                 ;;
