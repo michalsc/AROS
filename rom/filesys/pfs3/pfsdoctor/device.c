@@ -109,7 +109,7 @@ error_t c_GetBlock(uint8 *data, uint32 bloknr, uint32 bytes)
 		if (!cl)
 			return e_read_error;
 
-		memcpy(data, cl->data + offset*volume.blocksize, volume.blocksize);
+		CopyMem(cl->data + offset*volume.blocksize, data, volume.blocksize);
 	}
 	return error;
 }
@@ -131,7 +131,7 @@ error_t c_WriteBlock(uint8 *data, uint32 bloknr, uint32 bytes)
 		if (!cl)
 			return e_read_error;
 
-		memcpy(cl->data + offset*volume.blocksize, data, volume.blocksize);
+		CopyMem(data, cl->data + offset*volume.blocksize, volume.blocksize);
 		cl->dirty = true;
 	}
 	return error;

@@ -2631,7 +2631,7 @@ process_error:
 			 */
 			if (ccb->ccb_xa.state == ATA_S_ONCHIP) {
 				ccb_at = ccb->ccb_xa.at;
-				memcpy(&ccb->ccb_xa.rfis, ap->ap_rfis->rfis,
+				CopyMem(ap->ap_rfis->rfis, &ccb->ccb_xa.rfis,
 				       sizeof(struct ata_fis_d2h));
 				if (bootverbose) {
 					kprintf("%s: Copying rfis slot %d\n",
@@ -3052,8 +3052,8 @@ failall:
 			if (ccb->ccb_xa.state == ATA_S_ONCHIP) {
 				ccb->ccb_xa.state = ATA_S_COMPLETE;
 				if (ccb->ccb_xa.flags & ATA_F_AUTOSENSE) {
-					memcpy(&ccb->ccb_xa.rfis,
-					    ap->ap_rfis->rfis,
+					CopyMem(ap->ap_rfis->rfis,
+					    &ccb->ccb_xa.rfis,
 					    sizeof(struct ata_fis_d2h));
 					if (ccb->ccb_xa.state == ATA_S_TIMEOUT)
 						ccb->ccb_xa.state = ATA_S_ERROR;
@@ -3349,7 +3349,7 @@ ahci_port_read_ncq_error(struct ahci_port *ap, int target)
 			kprintf("%s: read NCQ error page slot=%d\n",
 				ATANAME(ap, ccb2->ccb_xa.at),
 				err_slot);
-			memcpy(&ccb2->ccb_xa.rfis, &log->err_regs,
+			CopyMem(&log->err_regs, &ccb2->ccb_xa.rfis,
 				sizeof(struct ata_fis_d2h));
 			ccb2->ccb_xa.rfis.type = ATA_FIS_TYPE_D2H;
 			ccb2->ccb_xa.rfis.flags = 0;

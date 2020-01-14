@@ -223,7 +223,7 @@ urndis_ctrl_handle_query(struct NepClassEth *ncp,
 
             p = (char *)&msg->rm_rid;
             p += letoh32(msg->rm_infobufoffset);
-            memcpy(*buf, p, letoh32(msg->rm_infobuflen));
+            CopyMem(p, *buf, letoh32(msg->rm_infobuflen));
         }
     }
 
@@ -251,7 +251,7 @@ urndis_ctrl_set(struct NepClassEth *ncp, uint32_t oid, void *buf, size_t len)
     msg->rm_infobuflen = htole32(len);
     if (len != 0) {
         msg->rm_infobufoffset = htole32(20);
-        memcpy((char*)msg + 20, buf, len);
+        CopyMem(buf, (char*)msg + 20, len);
     } else
         msg->rm_infobufoffset = 0;
     msg->rm_devicevchdl = 0;
@@ -390,7 +390,7 @@ urndis_ctrl_query(struct NepClassEth *ncp, uint32_t oid,
     msg->rm_infobuflen = htole32(qlen);
     if (qlen != 0) {
         msg->rm_infobufoffset = htole32(20);
-        memcpy((char*)msg + 20, qbuf, qlen);
+        CopyMem(qbuf, (char*)msg + 20, qlen);
     } else
         msg->rm_infobufoffset = 0;
     msg->rm_devicevchdl = 0;
@@ -608,7 +608,7 @@ urndis_attach(struct NepClassEth *ncp)
         return;
     }
     if (bufsz == ETHER_ADDR_SIZE) {
-        memcpy(eaddr, buf, ETHER_ADDR_SIZE);
+        CopyMem(buf, eaddr, ETHER_ADDR_SIZE);
         bug("%s: address %x:%x:%x:%x:%x:%x\n", DEVNAME, eaddr[0],eaddr[1],eaddr[2],eaddr[3],eaddr[4],eaddr[5]);
         psdFreeVec(buf);
     } else {

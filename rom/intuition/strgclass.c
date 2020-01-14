@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
-    Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2001-2003, The MorphOS Development Team. All Rights Reserved.
     $Id$
 */
 
@@ -55,7 +55,7 @@ static void set_buffer_str(struct StringInfo *StrInfo)
         len = StrInfo->MaxChars - 1;
 
     StrInfo->Buffer[len] = '\0';
-    memcpy(StrInfo->Buffer, ptr, len);
+    CopyMem(ptr, StrInfo->Buffer, len);
 }
 
 /*****************

@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Code for CONU_CHARMAP console units.
@@ -464,7 +464,7 @@ static VOID charmap_ascii(Class *cl, Object *o, ULONG xcp, ULONG ycp,
     SetMem(line->fgpen + xcp, CU(o)->cu_FgPen, len);
     SetMem(line->bgpen + xcp, CU(o)->cu_BgPen, len);
     SetMem(line->flags + xcp, CU(o)->cu_TxFlags, len);
-    memcpy(line->text + xcp, str, len);
+    CopyMem(str, line->text + xcp, len);
 
     // If cursor output is moved further right on the screen than
     // the last output, we need to fill the line

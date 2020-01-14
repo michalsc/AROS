@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2018, The AROS Development Team. All rights reserved.
     $Id$
 */
 
@@ -503,7 +503,7 @@ static VOID quick_copy(OOP_Class *cl, OOP_Object *o,
     
     if (msg->srcMod == bpl && msg->dstMod == bpl)
     {
-        memcpy(dst, src, bpl * msg->height);
+        CopyMem(src, dst, bpl * msg->height);
     }
     else
     {
@@ -514,7 +514,7 @@ static VOID quick_copy(OOP_Class *cl, OOP_Object *o,
 
         for (i = 0; i < msg->height; i ++)
         {
-            memcpy(dst, src, copy_width);
+            CopyMem(src, dst, copy_width);
             src += msg->srcMod;
             dst += msg->dstMod;
         }

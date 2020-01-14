@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2018, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Graphics colormap class implementation.
@@ -257,7 +257,7 @@ BOOL CM__Hidd_ColorMap__SetColors(OOP_Class *cl, OOP_Object *o,
 	if (NULL == newmap)
 	    return FALSE;
 	    
-	memcpy(newmap, data->clut.colors, sizeof (*newmap) * data->clut.entries);
+	CopyMem(data->clut.colors, newmap, sizeof (*newmap) * data->clut.entries);
 	
 	FreeMem(data->clut.colors, sizeof (*newmap) * data->clut.entries);
 	

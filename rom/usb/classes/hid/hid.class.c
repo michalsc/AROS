@@ -2011,7 +2011,7 @@ BOOL nReadReports(struct NepClassHid *nch)
                     TAG_END);
 
         actlen = descdata[0];
-        memcpy(buf, descdata, (size_t) actlen);
+        CopyMem(descdata, buf, (size_t) actlen);
         ioerr = 0;
         psdAddErrorMsg(RETURN_OK, (STRPTR) GM_UNIQUENAME(libname),
                        "Using HID Descriptor from initial configuration run.");

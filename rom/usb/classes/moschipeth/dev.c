@@ -765,7 +765,7 @@ void UpdateMulticastHash(struct NepClassEth *ncp)
         mar = (struct MulticastAddressRange *) ncp->ncp_Multicasts.lh_Head;
         while(mar->mar_Node.ln_Succ)
         {
-            memcpy(addr, mar->mar_LowerAddr, ETHER_ADDR_SIZE);
+            CopyMem(mar->mar_LowerAddr, addr, ETHER_ADDR_SIZE);
             do
             {
                 UBYTE hash;

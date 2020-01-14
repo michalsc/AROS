@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Gfx Hidd driver class implementation.
@@ -3544,7 +3544,7 @@ OOP_Object *GFXHIDD__Hidd_Gfx__RegisterPixFmt(OOP_Class *cl, struct TagItem *pix
 	    retpf->refcount = 1;
 
 	    /* Initialize the pixfmt object the "ugly" way */
-	    memcpy(retpf, &cmp_pf, sizeof (HIDDT_PixelFormat));
+	    CopyMem(&cmp_pf, retpf, sizeof (HIDDT_PixelFormat));
 
 	    DPF(bug("(%d, %d, %d, %d), (%x, %x, %x, %x), %d, %d, %d, %d\n"
 			, PF(&cmp_pf)->red_shift

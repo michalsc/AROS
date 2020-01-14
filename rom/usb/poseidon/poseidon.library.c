@@ -6723,7 +6723,7 @@ AROS_LH2(APTR, psdGetCfgChunk,
         res = psdAllocVec(AROS_LONG2BE(chnk[1])+8);
         if(res)
         {
-            memcpy(res, chnk, AROS_LONG2BE(chnk[1])+8);
+            CopyMem(chnk, res, AROS_LONG2BE(chnk[1])+8);
         }
     }
     pUnlockSem(ps, &ps->ps_ConfigLock);
@@ -7722,7 +7722,7 @@ BOOL pRemCfgChunk(LIBBASETYPEPTR ps, struct PsdIFFContext *pic, ULONG chnkid)
             len -= chlen;
             if(len)
             {
-                memcpy(buf, &((UBYTE *) buf)[chlen], (size_t) len);
+                CopyMem(&((UBYTE *) buf)[chlen], buf, (size_t) len);
             }
             pic->pic_ChunksLen -= chlen;
             KPRINTF(10, ("Deleted %ld bytes to %ld chunk len\n", chlen, pic->pic_ChunksLen));
@@ -7784,7 +7784,7 @@ struct PsdIFFContext * pAddCfgChunk(LIBBASETYPEPTR ps, struct PsdIFFContext *pic
             {
                 if(pic->pic_ChunksLen)
                 {
-                    memcpy(newbuf, pic->pic_Chunks, (size_t) pic->pic_ChunksLen);
+                    CopyMem(pic->pic_Chunks, newbuf, (size_t) pic->pic_ChunksLen);
                     psdFreeVec(pic->pic_Chunks);
                 }
                 pic->pic_Chunks = newbuf;
@@ -7793,7 +7793,7 @@ struct PsdIFFContext * pAddCfgChunk(LIBBASETYPEPTR ps, struct PsdIFFContext *pic
                 return(NULL);
             }
         }
-        memcpy(&(((UBYTE *) pic->pic_Chunks)[pic->pic_ChunksLen]), chunk, (size_t) len);
+        CopyMem(chunk, &(((UBYTE *) pic->pic_Chunks)[pic->pic_ChunksLen]), (size_t) len);
         pic->pic_ChunksLen += len;
         return(pic);
     }
@@ -7810,7 +7810,7 @@ ULONG * pInternalWriteForm(struct PsdIFFContext *pic, ULONG *buf)
     *buf++ = AROS_LONG2BE(pic->pic_FormID);
     if(pic->pic_ChunksLen)
     {
-        memcpy(buf, pic->pic_Chunks, (size_t) pic->pic_ChunksLen);
+        CopyMem(pic->pic_Chunks, buf, (size_t) pic->pic_ChunksLen);
         buf = (ULONG *) (((UBYTE *) buf) + pic->pic_ChunksLen);
     }
     while(subpic->pic_Node.ln_Succ)
@@ -7962,7 +7962,7 @@ STRPTR pGetStringChunk(LIBBASETYPEPTR ps, struct PsdIFFContext *pic, ULONG chunk
     {
         if((str = (STRPTR) psdAllocVec(AROS_LONG2BE(chunk[1]) + 1)))
         {
-            memcpy(str, &chunk[2], (size_t) AROS_LONG2BE(chunk[1]));
+            CopyMem(&chunk[2], str, (size_t) AROS_LONG2BE(chunk[1]));
             return(str);
         }
     }

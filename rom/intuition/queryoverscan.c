@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
+    Copyright ï¿½ 1995-2013, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2001-2003, The MorphOS Development Team. All Rights Reserved.
     $Id$
 */
 
@@ -81,22 +81,22 @@
         {
             case OSCAN_TEXT:
         	DEBUG_QUERYOVERSCAN(dprintf("LIB_QueryOverscan: OSCAN_TEXT\n"));
-        	memcpy(rect,&diminfo.TxtOScan,sizeof(struct Rectangle));
+        	CopyMem(&diminfo.TxtOScan,rect,sizeof(struct Rectangle));
         	break;
 
             case OSCAN_STANDARD:
         	DEBUG_QUERYOVERSCAN(dprintf("LIB_QueryOverscan: OSCAN_STANDARD\n"));
-        	memcpy(rect,&diminfo.StdOScan,sizeof(struct Rectangle));
+        	CopyMem(&diminfo.StdOScan,rect,sizeof(struct Rectangle));
         	break;
 
             case OSCAN_MAX:
         	DEBUG_QUERYOVERSCAN(dprintf("LIB_QueryOverscan: OSCAN_MAX\n"));
-        	memcpy(rect,&diminfo.MaxOScan,sizeof(struct Rectangle));
+        	CopyMem(&diminfo.MaxOScan,rect,sizeof(struct Rectangle));
         	break;
 
             case OSCAN_VIDEO:
         	DEBUG_QUERYOVERSCAN(dprintf("LIB_QueryOverscan: OSCAN_VIDEO\n"));
-        	memcpy(rect,&diminfo.VideoOScan,sizeof(struct Rectangle));
+        	CopyMem(&diminfo.VideoOScan,rect,sizeof(struct Rectangle));
         	break;
 
             default:
