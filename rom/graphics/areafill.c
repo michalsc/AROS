@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2001, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Area support functions
@@ -11,6 +11,7 @@
 #include <exec/memory.h>
 #include <proto/graphics.h>
 #include <proto/exec.h>
+#include <proto/utility.h>
 #include <graphics/rastport.h>
 #include <graphics/gfx.h>
 #include <graphics/gfxbase.h>
@@ -326,7 +327,7 @@ BOOL areafillpolygon(struct RastPort  * rp,
 
   /* first clear the buffer of the temporary rastport as far as necessary  */
   
-  memset(rp->TmpRas->RasPtr, 
+  SetMem(rp->TmpRas->RasPtr, 
          0, 
          BytesPerRow * (bounds->MaxY - bounds->MinY + 1));
   
@@ -569,7 +570,7 @@ void areafillellipse(struct RastPort  * rp,
   LONG d1 = t2 - t7 + (t4 >> 1);  /* error terms */
   LONG d2 = (t1 >> 1) - t8 + t5;
 
-  memset(rp->TmpRas->RasPtr,
+  SetMem(rp->TmpRas->RasPtr,
          0x00,
          BytesPerRow * (bounds->MaxY - bounds->MinY + 1) );
 /*

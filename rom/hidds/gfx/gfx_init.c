@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Gfx Hidd initialization code.
@@ -162,7 +162,7 @@ static OOP_Object *create_and_init_object(OOP_Class *cl, UBYTE *data, ULONG data
 	return NULL;
     }
 	    
-    memcpy(o, data, datasize);
+    CopyMem(data, o, datasize);
     
     return o;
 }

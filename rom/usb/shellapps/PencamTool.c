@@ -810,7 +810,7 @@ int main(int argc, char *argv[])
                  ULONG vw = w-4*3;
                  for(y = 0; y < vh; y++)
                  {
-                     memcpy(imgbuf+y*vw, imgbuf+(y+2)*w+6, (size_t) vw);
+                     CopyMem(imgbuf+(y+2)*w+6, imgbuf+y*vw, (size_t) vw);
                  }
                  FPrintf(outfile, "P6\n%ld %ld\n255\n", vw/3, vh);
                  Flush(outfile);

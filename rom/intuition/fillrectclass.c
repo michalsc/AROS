@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
+    Copyright ï¿½ 1995-2011, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2001-2003, The MorphOS Development Team. All Rights Reserved.
     $Id$
  
     AROS fillrectclass implementation.
@@ -82,7 +82,7 @@ IPTR FillRectClass__IM_DRAW(Class *cl, Object *obj, struct impDraw *msg)
 
     if (!((struct impDraw *)msg)->imp_RPort) return 0;
 
-    memcpy(&rp,((struct impDraw *)msg)->imp_RPort,sizeof (struct RastPort));
+    CopyMem(((struct impDraw *)msg)->imp_RPort,&rp,sizeof (struct RastPort));
     
     SetABPenDrMd(&rp, IM_FGPEN((struct Image *)obj),
                  IM_BGPEN((struct Image *)obj),

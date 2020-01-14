@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2019, The AROS Development Team. All rights reserved.
-    Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
+    Copyright ï¿½ 1995-2019, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2001-2003, The MorphOS Development Team. All Rights Reserved.
     $Id$
 */
 
@@ -952,7 +952,7 @@ STATIC ULONG DoSGHKey(struct SGWork *sgw, struct IntuitionBase *IntuitionBase)
                                         {
                                             int len;
                                             len = sgw->NumChars - sgw->BufferPos;
-                                            memcpy(&sgw->WorkBuffer[sgw->BufferPos-1],&sgw->WorkBuffer[sgw->BufferPos],len);
+                                            CopyMem(&sgw->WorkBuffer[sgw->BufferPos],&sgw->WorkBuffer[sgw->BufferPos-1],len);
 
                                             sgw->BufferPos--;
                                             sgw->WorkBuffer[sgw->BufferPos + len] = 0;
@@ -1010,7 +1010,7 @@ STATIC ULONG DoSGHKey(struct SGWork *sgw, struct IntuitionBase *IntuitionBase)
                                                             }
                                                         }
                                                         len = sgw->NumChars - sgw->BufferPos;
-                                                        memcpy(&sgw->WorkBuffer[pos],&sgw->WorkBuffer[sgw->BufferPos],len);
+                                                        CopyMem(&sgw->WorkBuffer[sgw->BufferPos],&sgw->WorkBuffer[pos],len);
 
                                                         sgw->NumChars -= sgw->BufferPos - pos;
                                                         sgw->BufferPos = pos;
@@ -1039,7 +1039,7 @@ STATIC ULONG DoSGHKey(struct SGWork *sgw, struct IntuitionBase *IntuitionBase)
                                                         {
                                                             int len;
                                                             len = sgw->NumChars - sgw->BufferPos;
-                                                            memcpy(&sgw->WorkBuffer[0],&sgw->WorkBuffer[sgw->BufferPos],len);
+                                                            CopyMem(&sgw->WorkBuffer[sgw->BufferPos],&sgw->WorkBuffer[0],len);
 
                                                             sgw->BufferPos = 0;
                                                             sgw->WorkBuffer[len] = 0;

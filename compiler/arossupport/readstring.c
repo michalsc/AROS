@@ -90,7 +90,7 @@
 
 	    if (buffer)
 	    {
-		memcpy (tmp, buffer, maxsize);
+		CopyMem (buffer, tmp, maxsize);
 		FreeVec (buffer);
 	    }
 

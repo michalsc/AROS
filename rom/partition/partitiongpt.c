@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2017, The AROS Development Team. All rights reserved.
     $Id$
     
     Desc: GPT partition table handler
@@ -106,22 +106,38 @@ static void ToUTF16(char *to, char *from, ULONG len)
  */
 static inline void uuid_from_le(uuid_t *to, uuid_t *id)
 {
+    union {
+        uuid_t *uuid;
+        ULONG *u32;
+    } uto, uid;
+
     to->time_low            = AROS_LE2LONG(id->time_low);
     to->time_mid            = AROS_LE2WORD(id->time_mid);
     to->time_hi_and_version = AROS_LE2WORD(id->time_hi_and_version);
 
-    /* Do not replace it with CopyMem(), gcc optimizes this nicely */
-    memcpy(&to->clock_seq_hi_and_reserved, &id->clock_seq_hi_and_reserved, 8);
+    /* Do not replace it with CopyMem() */
+    uto.uuid = to;
+    uid.uuid = id;
+    uto.u32[2] = uid.u32[2];
+    uto.u32[3] = uid.u32[3];
 }
 
 static inline void uuid_to_le(uuid_t *to, uuid_t *id)
 {
+    union {
+        uuid_t *uuid;
+        ULONG *u32;
+    } uto, uid;
+
     to->time_low            = AROS_LONG2LE(id->time_low);
     to->time_mid            = AROS_WORD2LE(id->time_mid);
     to->time_hi_and_version = AROS_WORD2LE(id->time_hi_and_version);
 
-    /* Do not replace it with CopyMem(), gcc optimizes this nicely */
-    memcpy(&to->clock_seq_hi_and_reserved, &id->clock_seq_hi_and_reserved, 8);
+    /* Do not replace it with CopyMem() */
+    uto.uuid = to;
+    uid.uuid = id;
+    uto.u32[2] = uid.u32[2];
+    uto.u32[3] = uid.u32[3];
 }
 
 static inline BOOL uuid_cmp_le(uuid_t *leid, const uuid_t *id)

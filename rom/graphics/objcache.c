@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2013, The AROS Development Team. All rights reserved.
     $Id$
 */
 
@@ -184,7 +184,7 @@ OOP_Object *obtain_cache_object(ObjectCache *objectCache, struct GfxBase *GfxBas
 	     	goto exit;
 		
 	     /* Copy the old cache data */
-	     memcpy(newcache, oc->cache, sizeof (*oc->cache) * oc->cachesize);
+		 CopyMem(oc->cache, newcache, sizeof (*oc->cache) * oc->cachesize);
 	     
 	     /* Free old cache */
 	     FreeMem(oc->cache, sizeof (*oc->cache) * oc->cachesize);

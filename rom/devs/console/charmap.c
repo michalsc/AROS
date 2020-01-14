@@ -1,5 +1,5 @@
 /*
-    Copyright © 2010-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2010-2020, The AROS Development Team. All rights reserved.
     $Id$
 
     Desc: Code for CONU_CHARMAP console units.
@@ -96,13 +96,13 @@ VOID charmap_resize(struct ConsoleBase *ConsoleDevice, struct charmap_line *line
     }
 
     if (text && line->text)
-        memcpy(line->text, text, size);
+        CopyMem(text, line->text, size);
     if (fgpen && line->fgpen)
-        memcpy(line->fgpen, fgpen, size);
+        CopyMem(fgpen, line->fgpen, size);
     if (bgpen && line->bgpen)
-        memcpy(line->bgpen, bgpen, size);
+        CopyMem(bgpen, line->bgpen, size);
     if (flags && line->flags)
-        memcpy(line->flags, flags, size);
+        CopyMem(flags, line->flags, size);
 
     if (text)
         FreeMem(text, size);

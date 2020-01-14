@@ -1330,7 +1330,7 @@ STRPTR GetStringChunk(ULONG *form, ULONG chnkid, STRPTR defstr)
     {
         if((str = (STRPTR) psdAllocVec(AROS_LONG2BE(chunkptr[1]) + 1)))
         {
-            memcpy(str, &chunkptr[2], (size_t) AROS_LONG2BE(chunkptr[1]));
+            CopyMem(&chunkptr[2], str, (size_t) AROS_LONG2BE(chunkptr[1]));
             return(str);
         }
     }

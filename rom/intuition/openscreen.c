@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
-    Copyright © 2001-2013, The MorphOS Development Team. All Rights Reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 2001-2013, The MorphOS Development Team. All Rights Reserved.
     $Id$
 
     Open a new screen.
@@ -1483,7 +1483,7 @@ static const char THIS_FILE[] = __FILE__;
         {
             struct TagItem tags[6];
 
-            memcpy(&vpe->DisplayClip, dclip,sizeof(struct Rectangle));
+            CopyMem(dclip,&vpe->DisplayClip,sizeof(struct Rectangle));
 #ifdef __AROS__
             /*
              * AROS: Set ViewPort offset and get size from dclip.

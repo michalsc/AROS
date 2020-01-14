@@ -82,7 +82,7 @@ error_t AllocBuildBlocks(void)
 					rext.mode = check;
 					rext.data = calloc(1, SIZEOF_RESBLOCK);
 					rext.blocknr = blocknr;
-					memcpy(rext.data, bbl->b.data, SIZEOF_RESBLOCK); 
+					CopyMem(bbl->b.data, rext.data, SIZEOF_RESBLOCK); 
 					break;
 
 				case SBLKID:
@@ -270,7 +270,7 @@ error_t BuildRootBlock(rootblock_t *rbl)
 	rbl->alwaysfree = rbl->blocksfree/20;
 
 	rbl->diskname[0] = strlen("FixedDisk");
-	memcpy(rbl->diskname+1, "FixedDisk", strlen("FixedDisk"));
+	CopyMem("FixedDisk", rbl->diskname+1, strlen("FixedDisk"));
 	
 	/* extension is created by build extension */
 

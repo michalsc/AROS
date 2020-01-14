@@ -1,5 +1,5 @@
 /*
-    Copyright © 1995-2020, The AROS Development Team. All rights reserved.
+    Copyright ï¿½ 1995-2020, The AROS Development Team. All rights reserved.
     $Id$
 */
 
@@ -48,7 +48,7 @@ static char *BSTR2C(BSTR srcs)
     dst = AllocVec(src[0] + 1, MEMF_ANY);
     if (!dst)
         return NULL;
-    memcpy(dst, src + 1, src[0]);
+    CopyMem(src + 1, dst, src[0]);
     dst[src[0]] = 0;
     return dst;
 }

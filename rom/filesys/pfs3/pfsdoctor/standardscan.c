@@ -1955,7 +1955,7 @@ static error_t SetExtraFields(struct extrafields *extrafields, struct direntry *
 	int diff;
 
 	to = (struct direntry *)entrybuffer;
-	memcpy(to, from, from->next);
+	CopyMem(from, to, from->next);
 	AddExtraFields(to, extrafields);
 
 	/* make room for new direntry */
@@ -1967,7 +1967,7 @@ static error_t SetExtraFields(struct extrafields *extrafields, struct direntry *
 	memmove(dest, start, movelen);
 
 	/* add new direntry */
-	memcpy((uint8 *)from, to, to->next);
+	CopyMem(to, (uint8 *)from, to->next);
 
 	return volume.writeblock((cachedblock_t *)dirblk);
 }
@@ -2730,7 +2730,7 @@ static error_t RepairReservedBitmap(void)
 			error = c_WriteBlock (t, ROOTBLOCK + volume.firstblock + i, volume.blocksize);
 			t += volume.blocksize;
 		}
-		memcpy(rbl, lrb, SIZEOF_RESBLOCK);
+		CopyMem(lrb, rbl, SIZEOF_RESBLOCK);
 	}
 	
 	FreeBufMem(lrb);

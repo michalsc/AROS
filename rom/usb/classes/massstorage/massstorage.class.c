@@ -1948,7 +1948,7 @@ LONG nGetGeometry(struct NepClassMS *ncm, struct IOStdReq *ioreq)
     if((ncm->ncm_GeoChangeCount == ncm->ncm_ChangeCount) && ncm->ncm_Geometry.dg_TotalSectors)
     {
         // cached
-        memcpy(tddg,&ncm->ncm_Geometry, (size_t) length);
+        CopyMem(&ncm->ncm_Geometry, tddg, (size_t) length);
         ioreq->io_Actual = length;
         return(0);
     }
@@ -2217,7 +2217,7 @@ LONG nGetGeometry(struct NepClassMS *ncm, struct IOStdReq *ioreq)
 
     ncm->ncm_Geometry.dg_BufMemType = MEMF_PUBLIC;
     ncm->ncm_Geometry.dg_Reserved = 0;
-    memcpy(tddg, &ncm->ncm_Geometry, (size_t) length);
+    CopyMem(&ncm->ncm_Geometry, tddg, (size_t) length);
     ioreq->io_Actual = length;
     ncm->ncm_GeoChangeCount = ncm->ncm_ChangeCount;
     return(ioreq->io_Error);
