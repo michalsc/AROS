@@ -53,7 +53,7 @@ AROS_LH0(struct ISAPNP_Card *, ISAPNP_AllocCard,
   {
     card->isapnpc_Node.ln_Type = ISAPNP_NT_CARD;
 
-    NewList( &card->isapnpc_Devices );
+    NEWLIST( &card->isapnpc_Devices );
     InitSemaphore( &card->isapnpc_Lock );
   }
 
@@ -115,7 +115,7 @@ AROS_LH0(struct ISAPNP_Device *, ISAPNP_AllocDevice,
   {
     dev->isapnpd_Node.ln_Type = ISAPNP_NT_DEVICE;
 
-    NewList( (struct List*) &dev->isapnpd_IDs );
+    NEWLIST( (struct List*) &dev->isapnpd_IDs );
     
     dev->isapnpd_Options = ISAPNP_AllocResourceGroup( ISAPNP_RG_PRI_GOOD, res );
     
@@ -125,7 +125,7 @@ AROS_LH0(struct ISAPNP_Device *, ISAPNP_AllocDevice,
       dev = NULL;
     }
     
-    NewList( (struct List*) &dev->isapnpd_Resources );
+    NEWLIST( (struct List*) &dev->isapnpd_Resources );
     InitSemaphore( &dev->isapnpd_Lock );
   }
 
@@ -201,8 +201,8 @@ AROS_LH1(struct ISAPNP_ResourceGroup *, ISAPNP_AllocResourceGroup,
     rg->isapnprg_Type = ISAPNP_NT_RESOURCE_GROUP;
     rg->isapnprg_Pri  = pri;
 
-    NewList( (struct List*) &rg->isapnprg_Resources );
-    NewList( (struct List*) &rg->isapnprg_ResourceGroups );
+    NEWLIST( (struct List*) &rg->isapnprg_Resources );
+    NEWLIST( (struct List*) &rg->isapnprg_ResourceGroups );
   }
 
   return rg;

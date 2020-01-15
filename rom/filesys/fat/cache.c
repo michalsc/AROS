@@ -101,9 +101,9 @@ APTR Cache_CreateCache(APTR priv, ULONG hash_size, ULONG block_count,
         /* Initialise each hash location's list, and free and dirty lists */
 
         for(i = 0; i < hash_size && success; i++)
-            NewList((struct List *)&c->hash_table[i]);
-        NewList((struct List *)&c->free_list);
-        NewList((struct List *)&c->dirty_list);
+            NEWLIST((struct List *)&c->hash_table[i]);
+        NEWLIST((struct List *)&c->free_list);
+        NEWLIST((struct List *)&c->dirty_list);
 
         /* Allocate cache blocks and add them to the free list */
 

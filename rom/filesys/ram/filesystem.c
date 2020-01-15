@@ -172,11 +172,11 @@ struct Object *CreateObject(struct Handler *handler, const TEXT *name,
       object->block_count = MEMBLOCKS(sizeof(struct Object));
       handler->block_count += MEMBLOCKS(sizeof(struct Object));
 
-      NewList((struct List *)&object->elements);
+      NEWLIST((struct List *)&object->elements);
       ((struct Node *)object)->ln_Pri = type;
       object->parent = parent;
       DateStamp(&object->date);
-      NewList((struct List *)&object->notifications);
+      NEWLIST((struct List *)&object->notifications);
 
       if(type == ST_FILE)
          AddTail((APTR)&object->elements, (APTR)&object->start_block);
@@ -1005,7 +1005,7 @@ struct Lock *LockObject(struct Handler *handler, struct Object *object,
          ((struct FileLock *)lock)->fl_Task = handler->proc_port;
          ((struct FileLock *)lock)->fl_Volume = MKBADDR(handler->volume);
 
-         NewList((struct List *)&lock->openings);
+         NEWLIST((struct List *)&lock->openings);
       }
       else
          error = IoErr();

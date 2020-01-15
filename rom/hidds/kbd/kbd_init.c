@@ -33,7 +33,7 @@ static int KBD_InitClass(struct kbdbase *LIBBASE)
     {
         OOP_Object *root = OOP_NewObject(NULL, CLID_HW_Root, NULL);
 
-        NewList((struct List *)&LIBBASE->csd.callbacks);
+        NEWLIST((struct List *)&LIBBASE->csd.callbacks);
 
         if (HW_AddDriver(root, LIBBASE->csd.hwClass, NULL))
         {

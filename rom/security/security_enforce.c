@@ -356,11 +356,11 @@ static int InterceptorProcess(void)
                 {
                     register int i;
                     for (i=0; i < TASKHASHVALUE; i++)	{
-                        NewList((struct List*)&secFSVolume->FHCache[i]);
-                        NewList((struct List*)&secFSVolume->ProxyHandles[i]);
+                        NEWLIST((struct List*)&secFSVolume->FHCache[i]);
+                        NEWLIST((struct List*)&secFSVolume->ProxyHandles[i]);
                     }
                 }
-                NewList((struct List*)&secFSVolume->ProxyLocks);
+                NEWLIST((struct List*)&secFSVolume->ProxyLocks);
 
                 D(bug( DEBUG_NAME_STR " %s: Hijacking Filesystems ...\n", __func__);)
 

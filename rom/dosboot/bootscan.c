@@ -320,7 +320,7 @@ void dosboot_BootScan(LIBBASETYPEPTR LIBBASE)
         /* Transfer all bootnodes in the mountlist into a temporary list.
            The assumption is that all bootnodes created before now represent
            entire disks */
-        NewList(&rootList);
+        NEWLIST(&rootList);
         while ((temp = (struct BootNode *)RemHead(&ExpansionBase->MountList))
             != NULL)
             AddTail(&rootList, (struct Node *) temp);

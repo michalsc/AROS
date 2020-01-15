@@ -849,7 +849,7 @@ FindConfiguration( struct ISAPNP_Device*   dev,
         struct MinList tmp;
         struct Node*   n;
         
-        NewList( (struct List* ) &tmp );
+        NEWLIST( (struct List* ) &tmp );
 
         rc = CreateResouces( ril, (struct List*) &tmp,
                              res );

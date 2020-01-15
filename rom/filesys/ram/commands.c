@@ -107,7 +107,7 @@ BOOL CmdStartup(struct Handler *handler, STRPTR name, struct DeviceNode *dev_nod
          MEMBLOCKS(sizeof(struct Handler));
       handler->min_block_size = MIN_BLOCK_SIZE;
       handler->max_block_size = MAX_BLOCK_SIZE;
-      NewList((APTR)&handler->examinations);
+      NEWLIST((APTR)&handler->examinations);
 
       dev_node->dn_Task = proc_port;
 
@@ -150,7 +150,7 @@ BOOL CmdStartup(struct Handler *handler, STRPTR name, struct DeviceNode *dev_nod
 
       /* Initialise notification handling */
 
-      NewList((APTR)&handler->notifications);
+      NEWLIST((APTR)&handler->notifications);
       port = CreateMsgPort();
       handler->notify_port = port;
       if(port == NULL)

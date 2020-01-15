@@ -228,7 +228,7 @@ BOOL _AllocExtLayerInfo(struct Layer_Info * li, struct LayersBase *LayersBase)
     if(!(li->LayerInfo_extra = AllocMem(sizeof(struct LayerInfo_extra),MEMF_PUBLIC|MEMF_CLEAR)))
 	return FALSE;
 
-    NewList((struct List *)&((struct LayerInfo_extra *)li->LayerInfo_extra)->lie_ResourceList);
+    NEWLIST((struct List *)&((struct LayerInfo_extra *)li->LayerInfo_extra)->lie_ResourceList);
 
     return TRUE;
 }

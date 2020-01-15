@@ -116,7 +116,7 @@ initRoutine( REG( d0, struct ISAPNPBase* res ),
         res->m_Library.lib_Revision     = REVISION;
         res->m_Library.lib_IdString     = (STRPTR) IDString;
 
-        NewList( &res->m_Cards );
+        NEWLIST( &res->m_Cards );
 
 	/* Base address, on i386 we don't have any mapping
         res->m_Base        = NULL; */

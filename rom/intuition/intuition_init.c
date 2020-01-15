@@ -243,7 +243,7 @@ static int IntuitionInit(LIBBASETYPEPTR LIBBASE)
            
 	for(i = 0; i < RESOURCELIST_HASHSIZE; i++)
 	{
-	    NewList((struct List *)&GetPrivIBase(LIBBASE)->ResourceList[i]);
+	    NEWLIST((struct List *)&GetPrivIBase(LIBBASE)->ResourceList[i]);
 	}
     }
 

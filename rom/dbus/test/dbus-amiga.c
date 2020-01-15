@@ -122,7 +122,7 @@ static void* CreateConnectionData(DBusConnection* connection) {
   if (c != NULL) {
     c->connection = connection;
     c->creator = FindTask(NULL);
-    NewList((struct List*) &c->watches);
+    NEWLIST((struct List*) &c->watches);
     
     Forbid();
     kprintf("creating mainloop\n");

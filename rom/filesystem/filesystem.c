@@ -13,7 +13,7 @@
 static int FileSystemInit(struct FileSysResource *FileSystemBase)
 {
     FileSystemBase->fsr_Creator = "AROS Development Team";
-    NewList(&FileSystemBase->fsr_FileSysEntries);
+    NEWLIST(&FileSystemBase->fsr_FileSysEntries);
 
     return TRUE;
 }

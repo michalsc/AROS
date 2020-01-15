@@ -64,7 +64,7 @@
     for(i = 0; i < sizeof(struct Layer_Info); i++)
 	((UBYTE *)li)[i] = 0;
 
-    NewList((struct List *)&li->gs_Head);
+    NEWLIST((struct List *)&li->gs_Head);
 
     InitSemaphore(&li->Lock);
 

@@ -97,7 +97,7 @@ AllocResourceIteratorContext( void )
   
   if( ctx != NULL )
   {
-    NewList( (struct List*) &ctx->m_IO );
+    NEWLIST( (struct List*) &ctx->m_IO );
   }
   
   return ctx;
@@ -507,7 +507,7 @@ KPrintF( "AllocResourceIteratorList()\n" );
   {
     struct ISAPNP_Resource* r;
 
-    NewList( (struct List*) &result->m_ResourceIterators );
+    NEWLIST( (struct List*) &result->m_ResourceIterators );
     
     r = (struct ISAPNP_Resource*) resource_list->mlh_Head;
     

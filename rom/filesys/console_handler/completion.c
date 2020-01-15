@@ -85,7 +85,7 @@ static struct completioninfo *InitCompletion(struct filehandle *fh, BOOL withinf
                     ci->pool = pool;
                     ci->fh = fh;
                     ci->withinfo = withinfo;
-                    NewList(&ci->matchlist);
+                    NEWLIST(&ci->matchlist);
 
                     ok = TRUE;
                 }

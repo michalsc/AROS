@@ -1086,7 +1086,7 @@ static VOID charmapcon_copy(Class *cl, Object *o, Msg copymsg)
         replyport.mp_Flags = PA_SIGNAL;
         replyport.mp_SigBit = SIGB_SINGLE;
         replyport.mp_SigTask = FindTask(NULL);
-        NewList(&replyport.mp_MsgList);
+        NEWLIST(&replyport.mp_MsgList);
 
         msg.msg.mn_Node.ln_Type = NT_MESSAGE;
         msg.msg.mn_ReplyPort = &replyport;

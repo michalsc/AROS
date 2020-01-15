@@ -20,7 +20,15 @@ AROS_INTH3(VBlankServer, struct List *, intList, intMask, custom)
 {
     AROS_INTFUNC_INIT
 
+    char *p = (char*)1;
+
     D(bug("[Exec] %s()\n", __func__));
+
+    *p = *p + 1;
+    if (*p >= 50) {
+        *p = 0;
+        bug("VBlank!\n");
+    }
 
     /* First decrease Elapsed time for current task */
     if (SysBase->Elapsed && (--SysBase->Elapsed == 0))

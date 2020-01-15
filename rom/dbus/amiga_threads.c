@@ -104,7 +104,7 @@ static DBusCondVar* _condvar_new(void) {
 				  MEMF_ANY|MEMF_CLEAR);
 
   if (cond != NULL) {
-    NewList((struct List*) &cond->Waiters);
+    NEWLIST((struct List*) &cond->Waiters);
   }
 
   return (DBusCondVar*) cond;
