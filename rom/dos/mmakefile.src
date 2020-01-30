@@ -24,7 +24,7 @@ USER_CPPFLAGS += -DDOCACHECLEAR
 IMAGE_TYPES := aos elf
 
 FILES	  := bstr_helper errorlist \
-             boot isbootable \
+             boot banner isbootable \
 	     match_misc newcliproc rootnode fs_driver \
 	     patternmatching internalseek internalflush \
 	     packethelper namefrom internalloadseg_support \
@@ -34,8 +34,8 @@ LOADSEG_FILES := internalloadseg \
 		 $(foreach img, $(IMAGE_TYPES), internalloadseg_$(img))
 
 FUNCTIONS := abortpkt addbuffers adddosentry addpart addsegment \
-	     allocdosobject assignadd assignlate assignlock assignpath \
-	     attemptlockdoslist changemode checksignal \
+	     allocdosobject assignadd assignaddtolist assignlate assignlock \
+	     assignpath attemptlockdoslist changemode checksignal \
 	     cli cliinit cliinitnewcli cliinitrun \
 	     close comparedates createdir createnewproc \
 	     createproc currentdir datestamp datetostr delay deletefile \
@@ -46,8 +46,8 @@ FUNCTIONS := abortpkt addbuffers adddosentry addpart addsegment \
 	     findvar flush format fputc fputs fread freeargs freedeviceproc \
 	     freedosentry freedosobject fwrite getargstr getconsoletask \
 	     getcurrentdirname getdeviceproc getfilesystask getprogramdir \
-	     getprogramname getprompt getvar info inhibit input \
-	     internalunloadseg ioerr isfilesystem \
+	     getprogramname getprompt getseglistinfo getvar info inhibit \
+	     input internalunloadseg ioerr isfilesystem \
 	     isinteractive loadseg lock lockdoslist lockrecord lockrecords \
 	     makedosentry makelink matchend matchfirst matchnext matchpattern \
 	     matchpatternnocase maxcli namefromfh namefromlock newloadseg nextdosentry nil \
@@ -86,6 +86,8 @@ $(GENDIR)/$(CURDIR)/dos/errorlist.d : $(GENDIR)/$(CURDIR)/dos/errorlist.h
 $(GENDIR)/$(CURDIR)/dos/errorlist.h : $(SRCDIR)/$(CURDIR)/catalogs/dos.cd $(SRCDIR)/$(CURDIR)/genstrings.py
 	@$(ECHO) Generating $@...
 	@$(PYTHON) $(SRCDIR)/$(CURDIR)/genstrings.py $< > $@
+
+USER_CPPFLAGS += -DLIBLOADSEG
 
 %build_linklib mmake=linklibs-loadseg libname=loadseg files="$(LOADSEG_FILES)" objdir=$(OBJDIR)/dos libdir=$(GENDIR)/lib
 
