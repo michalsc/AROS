@@ -47,11 +47,7 @@ TARGET_LTO                := @aros_config_lto@
 TARGET_TRANSLATEELF       = @aros_elf_translate@
 
 # Kernel private includes, in order of precedence:
-ifneq (,$(findstring $(ARCH),raspi))
-TARGET_KERNEL_INCLUDES    := -I$(SRCDIR)/arch/arm-native/kernel
-else
 TARGET_KERNEL_INCLUDES    := -I$(SRCDIR)/arch/$(CPU)-$(ARCH)/kernel
-endif
 TARGET_KERNEL_INCLUDES    += -I$(SRCDIR)/arch/all-$(ARCH)/kernel
 ifneq ($(FAMILY),)
 TARGET_KERNEL_INCLUDES    += -I$(SRCDIR)/arch/all-$(FAMILY)/kernel
@@ -60,11 +56,7 @@ TARGET_KERNEL_INCLUDES    += -I$(SRCDIR)/arch/$(CPU)-all/kernel \
                         -I$(SRCDIR)/rom/kernel
 
 # Exec private includes, in order of precedence:
-ifneq (,$(findstring $(ARCH),raspi))
-TARGET_EXEC_INCLUDES      := -I$(SRCDIR)/arch/arm-native/exec
-else
 TARGET_EXEC_INCLUDES      := -I$(SRCDIR)/arch/$(CPU)-$(ARCH)/exec
-endif
 TARGET_EXEC_INCLUDES      += -I$(SRCDIR)/arch/all-$(ARCH)/exec
 ifneq ($(FAMILY),)
 TARGET_EXEC_INCLUDES      += -I$(SRCDIR)/arch/all-$(FAMILY)/exec
