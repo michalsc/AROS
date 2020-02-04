@@ -1728,7 +1728,6 @@ case "$target_os" in
         ;;
 
     r*pi)
-        PLATFORM_EXECSMP="#define __AROSPLATFORM_SMP__"
         aros_flavour="standalone"
         aros_target_arch="raspi"
 
