@@ -1,0 +1,126 @@
+#
+# Rules to create AROS Kernel for raspi-m68k
+#
+
+include $(SRCDIR)/config/aros.cfg
+
+#MM- kernel-link-raspi-m68k : \
+#MM     general-setup-raspi-m68k \
+#MM     kernel-bsp-objs \
+#MM     kernel-objs \
+#MM     kernel-alerthook-kobj \
+#MM     kernel-aros-kobj \
+#MM     kernel-hidd-bus-kobj \
+#MM     kernel-hidd-base-kobj \
+#MM     kernel-expansion-kobj \
+#MM     kernel-ata-kobj \
+#MM     kernel-oop-kobj \
+#MM     kernel-audio-kobj \
+#MM     kernel-utility-kobj \
+#MM     kernel-battclock-kobj
+
+# Make sure we optimize this code for size ..
+OPTIMIZATION_CFLAGS := -Os
+
+USELIBS := amiga arossupport autoinit libinit stdc.static
+LIBS    := -L$(GENDIR)/lib -lloadseg $(addprefix -l,$(USELIBS))
+DEPLIBS := $(addprefix $(AROS_LIB)/lib,$(addsuffix .a,$(USELIBS)))
+
+# Force rebuilding, so that we always get new date strings
+rom_init.o: FORCE
+
+USER_CPPFLAGS := -DADATE="\"$(shell date "+%d.%m.%Y")\""
+
+FILES=devicetree boot serialdebug
+AFILES=rom_init
+
+KLIBS   := exec
+KDEVS   := 
+KHNDLRS := 
+KHIDDS  := 
+KRSRCS  := kernel
+KHOOKS  := 
+
+KOBJS_rom := $(addprefix $(KOBJSDIR)/,$(addsuffix _library.ko ,$(KLIBS))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _device.ko  ,$(KDEVS))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _handler.ko ,$(KHNDLRS))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _hidd.ko    ,$(KHIDDS))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _resource.ko,$(KRSRCS))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _driver.ko  ,$(KDRVRS) )) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix _hook.ko    ,$(KHOOKS) ))
+
+OBJS_rom := $(addprefix $(KOBJSDIR)/,$(addsuffix .o,$(AFILES))) \
+	$(addprefix $(KOBJSDIR)/,$(addsuffix .o,$(FILES)))
+
+$(GENDIR)/boot/aros-raspi-m68k-rom.elf: $(KOBJS_rom) $(OBJS_rom)
+
+#MM kernel-link-raspi-m68k:
+kernel-link-raspi-m68k : $(GENDIR)/boot/aros-raspi-m68k-rom.elf
+
+#MM kernel-link-raspi-m68k-quick: 
+kernel-link-raspi-m68k-quick : $(GENDIR)/boot/aros-raspi-m68k-rom.elf
+
+#MM
+clean ::
+	-$(RM) $(TESTS)
+
+USER_INCLUDES += $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) -I$(SRCDIR)/rom/openfirmware
+USER_CFLAGS += -fno-delete-null-pointer-checks
+
+$(KOBJSDIR)/%.o : %.c
+	%compile_q cmd="$(KERNEL_CC)" opt="$(strip $(CFLAGS) $(CPPFLAGS) -I$(AROS_DEVELOPER)/include -I$(GENINCDIR))"
+
+$(KOBJSDIR)/%.o : %.S
+	%compile_q cmd="$(KERNEL_CC)" opt="$(strip $(AFLAGS) $(TARGET_CFLAGS) $(CPPFLAGS) -I$(AROS_DEVELOPER)/include -I$(GENINCDIR))"
+
+$(KOBJSDIR)/%.d : %.c
+	%mkdepend_q
+
+# Localize symbols, so that we don't get name clashes when linking
+#
+# .. except for exec.library. Our boot code needs symbols from it
+#    (PrepareMoveExecBase, InitKickTags, etc)
+%/exec_library.ko: %/exec_library.o
+	$(Q)$(CP) $< $@
+
+# .. except for kernel.resource. Our boot code needs symbols from it
+#    (krnPrepareExecBase and krnCreateMemHeader)
+%/kernel_resource.ko: %/kernel_resource.o
+	$(Q)$(CP) $< $@
+
+# .. except for expansion.library. Our boot code needs symbols from it
+#    (__MemoryTest)
+%/expansion_library.ko: %/expansion_library.o
+	$(Q)$(CP) $< $@
+
+# Localize symbols for everybody else though!
+%.ko: %.o
+	$(Q)$(NM_PLAIN) --defined-only $< | cut -d' ' -f3 >$@.sym
+	$(Q)$(OBJCOPY) --localize-symbols $@.sym $< $@
+
+DEPS		:= $(foreach f, $(FILES), $(TARGETDIR)/$(f).d)
+-include $(DEPS)
+
+
+$(GENDIR)/boot/aros-raspi-m68k-rom.elf : $(DEPLIBS) $(SRCDIR)/$(CURDIR)/mmakefile.src \
+    $(OBJS_rom) $(KOBJS_rom)
+	@$(MKDIR) $(GENDIR)/boot
+	@$(ECHO) Linking $@...
+	$(Q)$(KERNEL_CC) -Wl,-r -d \
+		-static -nostartfiles -nostdlib \
+		-Wl,--defsym -Wl,start=0x0 \
+		-Wl,--defsym -Wl,SysBase=0x4 \
+		-Wl,--defsym -Wl,AbsExecBase=0x4 \
+		-m68020 \
+		-o $@ -Wl,-T -Wl,$(SRCDIR)/$(CURDIR)/ldscript.lds \
+        $(OBJS_rom) $(KOBJS_rom) \
+		-L$(AROS_LIB) $(LIBS) -lgcc
+
+$(AROSARCHDIR)/aros.elf: $(GENDIR)/boot/aros-raspi-m68k-rom.elf \
+	$(SRCDIR)/$(CURDIR)/mmakefile.src
+	$(Q)$(MKDIR) $(AROSARCHDIR)
+	$(Q)$(TARGET_OBJCOPY) \
+		--strip-unneeded \
+		$< $@
+
+%common
