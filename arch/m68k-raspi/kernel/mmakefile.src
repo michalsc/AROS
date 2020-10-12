@@ -1,0 +1,20 @@
+# $Id$
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := \
+        kernel_debug \
+        maygetchar
+
+AFILES=
+
+USER_INCLUDES := $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) \
+	       -I$(GENINCDIR) -I$(AROS_DEVELOPER)/include
+USER_CPPFLAGS := -DPARANOIA_STACK
+
+USER_AFLAGS := $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) \
+	       -I$(GENINCDIR) -I$(AROS_DEVELOPER)/include
+
+%build_archspecific \
+  mainmmake=kernel-kernel modname=kernel maindir=rom/kernel arch=raspi-m68k \
+  files="$(FILES)" asmfiles="$(AFILES)" compiler=kernel
