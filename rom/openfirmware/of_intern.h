@@ -12,9 +12,10 @@
 #include <exec/lists.h>
 #include <inttypes.h>
 
-typedef struct {
+typedef struct of_node {
 	struct MinNode	on_node;
 	char 			*on_name;
+	struct of_node  *on_parent;
 	struct MinList	on_children;
 	struct MinList	on_properties;
 
